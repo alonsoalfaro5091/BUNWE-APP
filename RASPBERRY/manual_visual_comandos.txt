@@ -1,0 +1,144 @@
+==========================================================================================
+||                      MANUAL DE COMANDOS - RASPBERRY PI BACKEND                       ||
+==========================================================================================
+
+------------------------------------------------------------------------------------------
+>> [ SECCIÓN 1: RASPBERRY PI - SISTEMA Y HARDWARE ]
+------------------------------------------------------------------------------------------
++-----------------------+----------------------------------+-----------------------------+
+| COMANDO               | UTILIDAD / QUÉ HACE              | MODO DE USO / EJEMPLO       |
++-----------------------+----------------------------------+-----------------------------+
+| df -h                 | Revisa espacio libre en disco.   | df -h                       |
+|                       |                                  |                             |
+| sudo raspi-config     | Configuración del sistema.       | sudo raspi-config           |
+|                       | Usado para expandir la MicroSD.  |                             |
+|                       |                                  |                             |
+| sudo shutdown -h now  | APAGADO SEGURO (Obligatorio).    | sudo shutdown -h now        |
+|                       | Evita corromper la tarjeta SD.   |                             |
+|                       |                                  |                             |
+| sudo reboot           | Reinicia la Raspberry Pi.        | sudo reboot                 |
+|                       |                                  |                             |
+| sudo apt update &&    | Actualiza los paquetes y el      | sudo apt update &&          |
+| sudo apt upgrade -y   | sistema operativo a la última.   | sudo apt upgrade -y         |
++-----------------------+----------------------------------+-----------------------------+
+
+------------------------------------------------------------------------------------------
+>> [ SECCIÓN 2: TAILSCALE - RED Y CONEXIÓN REMOTA ]
+------------------------------------------------------------------------------------------
++-----------------------+----------------------------------+-----------------------------+
+| COMANDO               | UTILIDAD / QUÉ HACE              | MODO DE USO / EJEMPLO       |
++-----------------------+----------------------------------+-----------------------------+
+| tailscale ip -4       | Muestra tu IP privada de la Pi.  | tailscale ip -4             |
+|                       | (Ejemplo: 100.75.19.64)          |                             |
+|                       |                                  |                             |
+| tailscale status      | Lista los dispositivos activos   | tailscale status            |
+|                       | en tu red de Tailscale.          |                             |
+|                       |                                  |                             |
+| ssh faro@100.X.X.X    | Conectarse a la terminal de la   | ssh faro@100.75.19.64       |
+|                       | Pi desde tu PC (Liceo/remoto).   |                             |
++-----------------------+----------------------------------+-----------------------------+
+
+------------------------------------------------------------------------------------------
+>> [ SECCIÓN 3: BASE DE DATOS MARIADB ]
+------------------------------------------------------------------------------------------
++-----------------------+----------------------------------+-----------------------------+
+| COMANDO               | UTILIDAD / QUÉ HACE              | MODO DE USO / EJEMPLO       |
++-----------------------+----------------------------------+-----------------------------+
+| sudo systemctl status | Revisa si la base de datos       | sudo systemctl status       |
+| mariadb               | MariaDB está corriendo bien.     | mariadb                     |
+|                       |                                  |                             |
+| sudo systemctl        | Reinicia el motor SQL para       | sudo systemctl restart      |
+| restart mariadb       | aplicar cambios de red.          | mariadb                     |
++-----------------------+----------------------------------+-----------------------------+
+[*] ARCHIVO MODIFICADO A MANO: /etc/mysql/mariadb.conf.d/50-server.cnf
+    -> Se cambió 'bind-address = 127.0.0.1' por '0.0.0.0' para dar acceso externo.
+
+------------------------------------------------------------------------------------------
+>> [ SECCIÓN 4: ENTORNO VIRTUAL Y PYTHON (VENV) ]
+------------------------------------------------------------------------------------------
++-----------------------+----------------------------------+-----------------------------+
+| COMANDO               | UTILIDAD / QUÉ HACE              | MODO DE USO / EJEMPLO       |
++-----------------------+----------------------------------+-----------------------------+
+| python3 -m venv venv  | Crea el entorno virtual aislado. | python3 -m venv venv        |
+|                       |                                  |                             |
+| source venv/bin/...   | Activa el entorno virtual para   | cd /home/faro/sleep-api &&  |
+|                       | usar FastAPI y PyMySQL.          | source venv/bin/activate    |
+|                       |                                  |                             |
+| deactivate            | Sale del entorno virtual.        | deactivate                  |
++-----------------------+----------------------------------+-----------------------------+
+
+------------------------------------------------------------------------------------------
+>> [ SECCIÓN 5: FASTAPI - CÓDIGO Y PRUEBAS ]
+------------------------------------------------------------------------------------------
++-----------------------+----------------------------------+-----------------------------+
+| COMANDO               | UTILIDAD / QUÉ HACE              | MODO DE USO / EJEMPLO       |
++-----------------------+----------------------------------+-----------------------------+
+| sudo ss -tulpn |     | Verifica si la API está          | sudo ss -tulpn | grep 8000  |
+| grep 8000             | escuchando en el puerto 8000.    |                             |
+|                       |                                  |                             |
+| curl http://loca...   | Prueba la API por dentro para    | curl http://localhost:8000  |
+|                       | ver si conecta con la BD.        | /historial                  |
++-----------------------+----------------------------------+-----------------------------+
+
+------------------------------------------------------------------------------------------
+>> [ SECCIÓN 6: SYSTEMD - AUTOMATIZACIÓN DE LA API ]
+------------------------------------------------------------------------------------------
++-----------------------+----------------------------------+-----------------------------+
+| COMANDO               | UTILIDAD / QUÉ HACE              | MODO DE USO / EJEMPLO       |
++-----------------------+----------------------------------+-----------------------------+
+| sudo systemctl        | Recarga Linux tras modificar el  | sudo systemctl              |
+| daemon-reload         | archivo 'sleep-api.service'.     | daemon-reload               |
+|                       |                                  |                             |
+| sudo systemctl enable | Hace que la API se encienda sola | sudo systemctl enable       |
+| sleep-api             | cuando la Pi se conecta a la luz.| sleep-api                   |
+|                       |                                  |                             |
+| sudo systemctl status | Muestra si el servicio automático| sudo systemctl status       |
+| sleep-api             | está 'active (running)'.         | sleep-api                   |
+|                       |                                  |                             |
+| sudo journalctl -u... | Ver errores de código de Python  | sudo journalctl -u sleep-api|
+|                       | si el servicio se cae.           | -n 50 --no-pager            |
++-----------------------+----------------------------------+-----------------------------+
+
+==========================================================================================
+||             PLANTILLA MAESTRA PARA TU ARCHIVO 'apiconfig.py' (A MANO)                 ||
+==========================================================================================
+
+import pymysql
+from fastapi import FastAPI, HTTPException
+
+app = FastAPI()
+
+def conectar_bd():
+    return pymysql.connect(
+        host='localhost', user='faro', password='TU_PASSWORD', db='sleep_db', autocommit=True
+    )
+
+# 1. RUTA GET (CONSULTAR)
+@app.get("/historial")
+def obtener_historial():
+    db = conectar_bd()
+    cursor = db.cursor(pymysql.cursors.DictCursor)
+    cursor.execute("SELECT id, name, horas FROM registro_sueno")
+    datos = cursor.fetchall()
+    db.close()
+    return {"historial": datos}
+
+# 2. RUTA POST (GUARDAR)
+@app.post("/guardar")
+def guardar_registro(nombre: str, horas: float, fecha: str):
+    if horas < 0 or horas > 24:
+        raise HTTPException(status_code=400, detail="Horas inválidas (0 a 24)")
+    db = conectar_bd()
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO registro_sueno (name, horas, fecha) VALUES (%s, %s, %s)", (nombre, horas, fecha))
+    db.close()
+    return {"status": "success"}
+
+==========================================================================================
+||                    REGLAS DE ORO PARA LOS 4 INTEGRANTES DEL EQUIPO                    ||
+==========================================================================================
+[01] Acordar el JSON el día 1 (Ej: {"nombre": "Alonso", "horas": 8}). ¡No se cambia!
+[02] Usar GitHub en parejas o ramas. Eviten pasarse archivos de código por WhatsApp.
+[03] Desarrollar Flutter con datos falsos (hardcodeados) antes de conectar a la Pi.
+[04] URL final para la aplicación en el liceo: http://100.75.19.64:8000/docs
+==========================================================================================
