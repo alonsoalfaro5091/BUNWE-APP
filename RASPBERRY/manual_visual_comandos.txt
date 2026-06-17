@@ -142,3 +142,5 @@ def guardar_registro(nombre: str, horas: float, fecha: str):
 [03] Desarrollar Flutter con datos falsos (hardcodeados) antes de conectar a la Pi.
 [04] URL final para la aplicación en el liceo: http://100.75.19.64:8000/docs
 ==========================================================================================
+
+pruebas git
