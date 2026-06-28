@@ -1,0 +1,1066 @@
+faro@BunweServer:~ $ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            1.6G     0  1.6G   0% /dev
+tmpfs           760M  9.9M  750M   2% /run
+/dev/mmcblk0p2   29G  4.3G   24G  16% /
+tmpfs           1.9G     0  1.9G   0% /dev/shm
+tmpfs           5.0M   16K  5.0M   1% /run/lock
+tmpfs           1.9G     0  1.9G   0% /tmp
+/dev/mmcblk0p1  505M   66M  439M  14% /boot/firmware
+tmpfs           1.0M     0  1.0M   0% /run/credentials/getty@tty1.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/serial-getty@ttyS0.service
+tmpfs           380M  8.0K  380M   1% /run/user/1000
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+faro@BunweServer:~ $ sudo raspi-config
+
+Welcome to fdisk (util-linux 2.41).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+This disk is currently in use - repartitioning is probably a bad idea.
+It's recommended to umount all file systems, and swapoff all swap
+partitions on this disk.
+
+
+Command (m for help):
+Disk /dev/mmcblk0: 29.72 GiB, 31914983424 bytes, 62333952 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x87e6e5f5
+
+Device         Boot   Start      End  Sectors  Size Id Type
+/dev/mmcblk0p1        16384  1064959  1048576  512M  c W95 FAT32 (LBA)
+/dev/mmcblk0p2      1064960 62333951 61268992 29.2G 83 Linux
+
+Command (m for help): Partition number (1,2, default 2):
+Partition 2 has been deleted.
+
+Command (m for help): Partition type
+   p   primary (1 primary, 0 extended, 3 free)
+   e   extended (container for logical partitions)
+Select (default p): Partition number (2-4, default 2): First sector (2048-62333951, default 2048): Last sector, +/-sectors or +/-size{K,M,G,T,P} (1064960-62333951, default 62333951):
+Created a new partition 2 of type 'Linux' and of size 29.2 GiB.
+Partition #2 contains a ext4 signature.
+
+Command (m for help):
+Disk /dev/mmcblk0: 29.72 GiB, 31914983424 bytes, 62333952 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x87e6e5f5
+
+Device         Boot   Start      End  Sectors  Size Id Type
+/dev/mmcblk0p1        16384  1064959  1048576  512M  c W95 FAT32 (LBA)
+/dev/mmcblk0p2      1064960 62333951 61268992 29.2G 83 Linux
+
+Command (m for help): The partition table has been altered.
+Syncing disks.
+
+faro@BunweServer:~ $ Read from remote host bunweserver.local: Connection reset by peer
+Connection to bunweserver.local closed.
+client_loop: send disconnect: Connection reset by peer
+
+kuroi@PC-Alonso MINGW64 ~
+$ df -h
+Filesystem            Size  Used Avail Use% Mounted on
+C:/Program Files/Git  476G  208G  269G  44% /
+
+kuroi@PC-Alonso MINGW64 ~
+$ ssh faro@BunweServer.local
+faro@bunweserver.local's password:
+Linux BunweServer 6.18.29+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.18.29-1+rpt1 (2026-05-12) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri May 29 20:58:20 2026 from 2803:c180:2101:8456:1498:6f3:689b:8747
+faro@BunweServer:~ $ df - h
+df: -: No such file or directory
+df: h: No such file or directory
+faro@BunweServer:~ $ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            1.6G     0  1.6G   0% /dev
+tmpfs           760M  9.0M  751M   2% /run
+/dev/mmcblk0p2   29G  4.3G   24G  16% /
+tmpfs           1.9G     0  1.9G   0% /dev/shm
+tmpfs           5.0M   16K  5.0M   1% /run/lock
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+tmpfs           1.9G     0  1.9G   0% /tmp
+/dev/mmcblk0p1  505M   66M  439M  14% /boot/firmware
+tmpfs           1.0M     0  1.0M   0% /run/credentials/getty@tty1.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/serial-getty@ttyS0.service
+tmpfs           380M  8.0K  380M   1% /run/user/1000
+faro@BunweServer:~ $ sudo apt update
+[sudo] password for faro:
+Hit:1 http://deb.debian.org/debian trixie InRelease
+Hit:2 http://deb.debian.org/debian trixie-updates InRelease
+Hit:3 http://deb.debian.org/debian-security trixie-security InRelease
+Hit:4 http://archive.raspberrypi.com/debian trixie InRelease
+All packages are up to date.
+faro@BunweServer:~ $ sudo apt install mariadb-server -y
+The following packages were automatically installed and are no longer required:
+  libdrm-amdgpu1  libgbm1    libllvm19          libwayland-client0  libxcb-dri3-0    libxcb-shm0     libxshmfence1
+  libegl-mesa0    libgles2   libsensors-config  libwayland-server0  libxcb-present0  libxcb-sync1    libz3-4
+  libegl1         libglvnd0  libsensors5        libx11-xcb1         libxcb-randr0    libxcb-xfixes0  mesa-libgallium
+Use 'sudo apt autoremove' to remove them.
+
+Installing:
+  mariadb-server
+
+Installing dependencies:
+  galera-4                 libfcgi-bin                 libio-html-perl         libtimedate-perl               mariadb-plugin-provider-lzo
+  gawk                     libfcgi-perl                liblsof0                liburi-perl                    mariadb-plugin-provider-snappy
+  libaio1t64               libfcgi0t64                 liblwp-mediatypes-perl  liburing2                      mariadb-server-core
+  libcgi-fast-perl         libgpm2                     liblzo2-2               lsof                           mysql-common
+  libcgi-pm-perl           libhtml-parser-perl         libmariadb3             mariadb-client                 pv
+  libclone-perl            libhtml-tagset-perl         libncurses6             mariadb-client-core            socat
+  libconfig-inifiles-perl  libhtml-template-perl       libpcre2-posix3         mariadb-common
+  libdbd-mariadb-perl      libhttp-date-perl           libsigsegv2             mariadb-plugin-provider-bzip2
+  libdbi-perl              libhttp-message-perl        libsnappy1v5            mariadb-plugin-provider-lz4
+  libencode-locale-perl    libio-compress-brotli-perl  libterm-readkey-perl    mariadb-plugin-provider-lzma
+
+Suggested packages:
+  gawk-doc       libnet-daemon-perl     gpm                libipc-sharedcache-perl  libmime-base32-perl  libwww-perl  mariadb-test
+  libmldbm-perl  libsql-statement-perl  libdata-dump-perl  libbusiness-isbn-perl    libregexp-ipv6-perl  mailx        doc-base
+
+Summary:
+  Upgrading: 0, Installing: 47, Removing: 0, Not Upgrading: 0
+  Download size: 19.8 MB
+  Space needed: 205 MB / 24.9 GB available
+
+Get:1 http://deb.debian.org/debian trixie/main arm64 galera-4 arm64 26.4.23-0+deb13u1 [774 kB]
+Get:2 http://deb.debian.org/debian trixie/main arm64 libsigsegv2 arm64 2.14-1+b2 [34.3 kB]
+Get:3 http://deb.debian.org/debian trixie/main arm64 gawk arm64 1:5.2.1-2+b2 [644 kB]
+Get:4 http://deb.debian.org/debian trixie/main arm64 mysql-common all 5.8+1.1.1 [6,784 B]
+Get:5 http://deb.debian.org/debian trixie/main arm64 mariadb-common all 1:11.8.6-0+deb13u1 [29.5 kB]
+Get:6 http://deb.debian.org/debian trixie/main arm64 libdbi-perl arm64 1.647-1 [856 kB]
+Get:7 http://deb.debian.org/debian trixie/main arm64 liblsof0 arm64 4.99.4+dfsg-2 [128 kB]
+Get:8 http://deb.debian.org/debian trixie/main arm64 lsof arm64 4.99.4+dfsg-2 [306 kB]
+Get:9 http://deb.debian.org/debian trixie/main arm64 libconfig-inifiles-perl all 3.000003-3 [44.8 kB]
+Get:10 http://deb.debian.org/debian trixie/main arm64 libmariadb3 arm64 1:11.8.6-0+deb13u1 [175 kB]
+Get:11 http://deb.debian.org/debian trixie/main arm64 libncurses6 arm64 6.5+20250216-2 [96.1 kB]
+Get:12 http://deb.debian.org/debian trixie/main arm64 mariadb-client-core arm64 1:11.8.6-0+deb13u1 [887 kB]
+Get:13 http://deb.debian.org/debian trixie/main arm64 libpcre2-posix3 arm64 10.46-1~deb13u1 [64.1 kB]
+Get:14 http://deb.debian.org/debian trixie/main arm64 mariadb-client arm64 1:11.8.6-0+deb13u1 [3,052 kB]
+Get:15 http://deb.debian.org/debian trixie/main arm64 libaio1t64 arm64 0.3.113-8+b1 [15.0 kB]
+Get:16 http://deb.debian.org/debian trixie/main arm64 liburing2 arm64 2.9-1 [26.2 kB]
+Get:17 http://deb.debian.org/debian trixie/main arm64 mariadb-server-core arm64 1:11.8.6-0+deb13u1 [7,382 kB]
+Get:18 http://deb.debian.org/debian trixie/main arm64 socat arm64 1.8.0.3-1 [411 kB]
+Get:19 http://deb.debian.org/debian trixie/main arm64 mariadb-server arm64 1:11.8.6-0+deb13u1 [3,651 kB]
+Get:20 http://deb.debian.org/debian trixie/main arm64 libhtml-tagset-perl all 3.24-1 [14.7 kB]
+Get:21 http://deb.debian.org/debian trixie/main arm64 liburi-perl all 5.30-1 [105 kB]
+Get:22 http://deb.debian.org/debian trixie/main arm64 libhtml-parser-perl arm64 3.83-1+b2 [97.5 kB]
+Get:23 http://deb.debian.org/debian trixie/main arm64 libcgi-pm-perl all 4.68-1 [217 kB]
+Get:24 http://deb.debian.org/debian trixie/main arm64 libfcgi0t64 arm64 2.4.5-0.1 [25.0 kB]
+Get:25 http://deb.debian.org/debian trixie/main arm64 libfcgi-perl arm64 0.82+ds-3+b2 [24.4 kB]
+Get:26 http://deb.debian.org/debian trixie/main arm64 libcgi-fast-perl all 1:2.17-1 [11.8 kB]
+Get:27 http://deb.debian.org/debian trixie/main arm64 libclone-perl arm64 0.47-1+b1 [13.7 kB]
+Get:28 http://deb.debian.org/debian trixie/main arm64 libdbd-mariadb-perl arm64 1.22-1+b4 [88.6 kB]
+Get:29 http://deb.debian.org/debian trixie/main arm64 libencode-locale-perl all 1.05-3 [12.9 kB]
+Get:30 http://deb.debian.org/debian trixie/main arm64 libfcgi-bin arm64 2.4.5-0.1 [11.9 kB]
+Get:31 http://deb.debian.org/debian trixie/main arm64 libgpm2 arm64 1.20.7-11+b2 [14.7 kB]
+Get:32 http://deb.debian.org/debian trixie/main arm64 libhtml-template-perl all 2.97-2 [66.5 kB]
+Get:33 http://deb.debian.org/debian trixie/main arm64 libtimedate-perl all 2.3300-2 [39.3 kB]
+Get:34 http://deb.debian.org/debian trixie/main arm64 libhttp-date-perl all 6.06-1 [10.7 kB]
+Get:35 http://deb.debian.org/debian trixie/main arm64 libio-html-perl all 1.004-3 [16.2 kB]
+Get:36 http://deb.debian.org/debian trixie/main arm64 liblwp-mediatypes-perl all 6.04-2 [20.2 kB]
+Get:37 http://deb.debian.org/debian trixie/main arm64 libhttp-message-perl all 7.00-2 [79.8 kB]
+Get:38 http://deb.debian.org/debian trixie/main arm64 libio-compress-brotli-perl arm64 0.004001-2+b3 [16.8 kB]
+Get:39 http://deb.debian.org/debian trixie/main arm64 liblzo2-2 arm64 2.10-3+b1 [49.6 kB]
+Get:40 http://deb.debian.org/debian trixie/main arm64 libsnappy1v5 arm64 1.2.2-1 [28.3 kB]
+Get:41 http://deb.debian.org/debian trixie/main arm64 libterm-readkey-perl arm64 2.38-2+b4 [24.5 kB]
+Get:42 http://deb.debian.org/debian trixie/main arm64 mariadb-plugin-provider-bzip2 arm64 1:11.8.6-0+deb13u1 [30.3 kB]
+Get:43 http://deb.debian.org/debian trixie/main arm64 mariadb-plugin-provider-lz4 arm64 1:11.8.6-0+deb13u1 [30.2 kB]
+Get:44 http://deb.debian.org/debian trixie/main arm64 mariadb-plugin-provider-lzma arm64 1:11.8.6-0+deb13u1 [30.2 kB]
+Get:45 http://deb.debian.org/debian trixie/main arm64 mariadb-plugin-provider-lzo arm64 1:11.8.6-0+deb13u1 [30.2 kB]
+Get:46 http://deb.debian.org/debian trixie/main arm64 mariadb-plugin-provider-snappy arm64 1:11.8.6-0+deb13u1 [30.2 kB]
+Get:47 http://deb.debian.org/debian trixie/main arm64 pv arm64 1.9.31-1 [111 kB]
+Fetched 19.8 MB in 3s (7,716 kB/s)
+Extracting templates from packages: 100%
+Preconfiguring packages ...
+Selecting previously unselected package galera-4.
+(Reading database ... 87372 files and directories currently installed.)
+Preparing to unpack .../galera-4_26.4.23-0+deb13u1_arm64.deb ...
+Unpacking galera-4 (26.4.23-0+deb13u1) ...
+Selecting previously unselected package libsigsegv2:arm64.
+Unpacking libsigsegv2:arm64 (2.14-1+b2) ...b2_arm64.deb ...
+Setting up libsigsegv2:arm64 (2.14-1+b2) ...
+Selecting previously unselected package gawk.
+(Reading database ... 87391 files and directories currently installed.)
+Preparing to unpack .../00-gawk_1%3a5.2.1-2+b2_arm64.deb ...
+Unpacking gawk (1:5.2.1-2+b2) ...
+Selecting previously unselected package mysql-common.
+Preparing to unpack .../01-mysql-common_5.8+1.1.1_all.deb ...
+Unpacking mysql-common (5.8+1.1.1) ...
+Selecting previously unselected package mariadb-common.
+Preparing to unpack .../02-mariadb-common_1%3a11.8.6-0+deb13u1_all.deb ...
+Unpacking mariadb-common (1:11.8.6-0+deb13u1) ...
+Selecting previously unselected package libdbi-perl:arm64.
+Preparing to unpack .../03-libdbi-perl_1.647-1_arm64.deb ...
+Unpacking libdbi-perl:arm64 (1.647-1) ...
+Selecting previously unselected package liblsof0.
+Preparing to unpack .../04-liblsof0_4.99.4+dfsg-2_arm64.deb ...                                             ]
+Unpacking liblsof0 (4.99.4+dfsg-2) ...
+Selecting previously unselected package lsof.
+Preparing to unpack .../05-lsof_4.99.4+dfsg-2_arm64.deb ...
+Unpacking lsof (4.99.4+dfsg-2) ...
+Selecting previously unselected package libconfig-inifiles-perl.
+Preparing to unpack .../06-libconfig-inifiles-perl_3.000003-3_all.deb ...
+Unpacking libconfig-inifiles-perl (3.000003-3) ...
+Selecting previously unselected package libmariadb3:arm64.
+Preparing to unpack .../07-libmariadb3_1%3a11.8.6-0+deb13u1_arm64.deb ...
+Unpacking libmariadb3:arm64 (1:11.8.6-0+deb13u1) ...
+Selecting previously unselected package libncurses6:arm64.
+Preparing to unpack .../08-libncurses6_6.5+20250216-2_arm64.deb ...
+Unpacking libncurses6:arm64 (6.5+20250216-2) ...
+Selecting previously unselected package mariadb-client-core.
+Preparing to unpack .../09-mariadb-client-core_1%3a11.8.6-0+deb13u1_arm64.deb ...
+Unpacking mariadb-client-core (1:11.8.6-0+deb13u1) ...
+Selecting previously unselected package libpcre2-posix3:arm64.
+Preparing to unpack .../10-libpcre2-posix3_10.46-1~deb13u1_arm64.deb ...
+Unpacking libpcre2-posix3:arm64 (10.46-1~deb13u1) ...
+Selecting previously unselected package mariadb-client.
+Preparing to unpack .../11-mariadb-client_1%3a11.8.6-0+deb13u1_arm64.deb ...
+Unpacking mariadb-client (1:11.8.6-0+deb13u1) ...
+Selecting previously unselected package libaio1t64:arm64.
+Preparing to unpack .../12-libaio1t64_0.3.113-8+b1_arm64.deb ...
+Unpacking libaio1t64:arm64 (0.3.113-8+b1) ...
+Selecting previously unselected package liburing2:arm64.
+Preparing to unpack .../13-liburing2_2.9-1_arm64.deb ...
+Unpacking liburing2:arm64 (2.9-1) ...
+Selecting previously unselected package mariadb-server-core.
+Preparing to unpack .../14-mariadb-server-core_1%3a11.8.6-0+deb13u1_arm64.deb ...
+Unpacking mariadb-server-core (1:11.8.6-0+deb13u1) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../15-socat_1.8.0.3-1_arm64.deb ...
+Unpacking socat (1.8.0.3-1) ...
+Setting up mysql-common (5.8+1.1.1) ...
+update-alternatives: using /etc/mysql/my.cnf.fallback to provide /etc/mysql/my.cnf (my.cnf) in auto mode
+Setting up mariadb-common (1:11.8.6-0+deb13u1) ...
+update-alternatives: using /etc/mysql/mariadb.cnf to provide /etc/mysql/my.cnf (my.cnf) in auto mode
+Selecting previously unselected package mariadb-server.
+(Reading database ... 88075 files and directories currently installed.)
+Preparing to unpack .../00-mariadb-server_1%3a11.8.6-0+deb13u1_arm64.deb ...
+Unpacking mariadb-server (1:11.8.6-0+deb13u1) ...
+Selecting previously unselected package libhtml-tagset-perl.
+Preparing to unpack .../01-libhtml-tagset-perl_3.24-1_all.deb ...
+Unpacking libhtml-tagset-perl (3.24-1) ...
+Selecting previously unselected package liburi-perl.
+Preparing to unpack .../02-liburi-perl_5.30-1_all.deb ...
+Unpacking liburi-perl (5.30-1) ...
+Selecting previously unselected package libhtml-parser-perl:arm64.
+Preparing to unpack .../03-libhtml-parser-perl_3.83-1+b2_arm64.deb ...
+Unpacking libhtml-parser-perl:arm64 (3.83-1+b2) ...
+Selecting previously unselected package libcgi-pm-perl.
+Preparing to unpack .../04-libcgi-pm-perl_4.68-1_all.deb ...
+Unpacking libcgi-pm-perl (4.68-1) ...
+Selecting previously unselected package libfcgi0t64:arm64.
+Preparing to unpack .../05-libfcgi0t64_2.4.5-0.1_arm64.deb ...
+Unpacking libfcgi0t64:arm64 (2.4.5-0.1) ...
+Selecting previously unselected package libfcgi-perl.
+Preparing to unpack .../06-libfcgi-perl_0.82+ds-3+b2_arm64.deb ...
+Unpacking libfcgi-perl (0.82+ds-3+b2) ...
+Selecting previously unselected package libcgi-fast-perl.
+Preparing to unpack .../07-libcgi-fast-perl_1%3a2.17-1_all.deb ...
+Unpacking libcgi-fast-perl (1:2.17-1) ...
+Selecting previously unselected package libclone-perl:arm64.
+Preparing to unpack .../08-libclone-perl_0.47-1+b1_arm64.deb ...
+Unpacking libclone-perl:arm64 (0.47-1+b1) ...
+Selecting previously unselected package libdbd-mariadb-perl.
+Preparing to unpack .../09-libdbd-mariadb-perl_1.22-1+b4_arm64.deb ...
+Unpacking libdbd-mariadb-perl (1.22-1+b4) ...
+Selecting previously unselected package libencode-locale-perl.
+Preparing to unpack .../10-libencode-locale-perl_1.05-3_all.deb ...
+Unpacking libencode-locale-perl (1.05-3) ...
+Selecting previously unselected package libfcgi-bin.
+Preparing to unpack .../11-libfcgi-bin_2.4.5-0.1_arm64.deb ...
+Unpacking libfcgi-bin (2.4.5-0.1) ...
+Selecting previously unselected package libgpm2:arm64.
+Preparing to unpack .../12-libgpm2_1.20.7-11+b2_arm64.deb ...
+Unpacking libgpm2:arm64 (1.20.7-11+b2) ...
+Selecting previously unselected package libhtml-template-perl.
+Preparing to unpack .../13-libhtml-template-perl_2.97-2_all.deb ...
+Unpacking libhtml-template-perl (2.97-2) ...
+Selecting previously unselected package libtimedate-perl.
+Preparing to unpack .../14-libtimedate-perl_2.3300-2_all.deb ...
+Unpacking libtimedate-perl (2.3300-2) ...
+Selecting previously unselected package libhttp-date-perl.
+Preparing to unpack .../15-libhttp-date-perl_6.06-1_all.deb ...
+Unpacking libhttp-date-perl (6.06-1) ...
+Selecting previously unselected package libio-html-perl.
+Preparing to unpack .../16-libio-html-perl_1.004-3_all.deb ...
+Unpacking libio-html-perl (1.004-3) ...
+Selecting previously unselected package liblwp-mediatypes-perl.
+Preparing to unpack .../17-liblwp-mediatypes-perl_6.04-2_all.deb ...
+Unpacking liblwp-mediatypes-perl (6.04-2) ...
+Selecting previously unselected package libhttp-message-perl.
+Preparing to unpack .../18-libhttp-message-perl_7.00-2_all.deb ...
+Unpacking libhttp-message-perl (7.00-2) ...
+Selecting previously unselected package libio-compress-brotli-perl.
+Preparing to unpack .../19-libio-compress-brotli-perl_0.004001-2+b3_arm64.deb ...
+Unpacking libio-compress-brotli-perl (0.004001-2+b3) ...
+Selecting previously unselected package liblzo2-2:arm64.
+Preparing to unpack .../20-liblzo2-2_2.10-3+b1_arm64.deb ...
+Unpacking liblzo2-2:arm64 (2.10-3+b1) ...
+Selecting previously unselected package libsnappy1v5:arm64.
+Preparing to unpack .../21-libsnappy1v5_1.2.2-1_arm64.deb ...
+Unpacking libsnappy1v5:arm64 (1.2.2-1) ...
+Selecting previously unselected package libterm-readkey-perl.
+Preparing to unpack .../22-libterm-readkey-perl_2.38-2+b4_arm64.deb ...
+Unpacking libterm-readkey-perl (2.38-2+b4) ...
+Selecting previously unselected package mariadb-plugin-provider-bzip2.
+Preparing to unpack .../23-mariadb-plugin-provider-bzip2_1%3a11.8.6-0+deb13u1_arm64.deb ...
+Unpacking mariadb-plugin-provider-bzip2 (1:11.8.6-0+deb13u1) ...
+Selecting previously unselected package mariadb-plugin-provider-lz4.
+Preparing to unpack .../24-mariadb-plugin-provider-lz4_1%3a11.8.6-0+deb13u1_arm64.deb ...
+Unpacking mariadb-plugin-provider-lz4 (1:11.8.6-0+deb13u1) ...
+Selecting previously unselected package mariadb-plugin-provider-lzma.
+Preparing to unpack .../25-mariadb-plugin-provider-lzma_1%3a11.8.6-0+deb13u1_arm64.deb ...
+Unpacking mariadb-plugin-provider-lzma (1:11.8.6-0+deb13u1) ...
+Selecting previously unselected package mariadb-plugin-provider-lzo.
+Preparing to unpack .../26-mariadb-plugin-provider-lzo_1%3a11.8.6-0+deb13u1_arm64.deb ...
+Unpacking mariadb-plugin-provider-lzo (1:11.8.6-0+deb13u1) ...
+Selecting previously unselected package mariadb-plugin-provider-snappy.
+Preparing to unpack .../27-mariadb-plugin-provider-snappy_1%3a11.8.6-0+deb13u1_arm64.deb ...
+Unpacking mariadb-plugin-provider-snappy (1:11.8.6-0+deb13u1) ...
+Selecting previously unselected package pv.
+Preparing to unpack .../28-pv_1.9.31-1_arm64.deb ...
+Unpacking pv (1.9.31-1) ...
+Setting up libconfig-inifiles-perl (3.000003-3) ...
+Setting up galera-4 (26.4.23-0+deb13u1) ...
+Setting up libgpm2:arm64 (1.20.7-11+b2) ...
+Setting up gawk (1:5.2.1-2+b2) ...
+Setting up libclone-perl:arm64 (0.47-1+b1) ...
+Setting up liblsof0 (4.99.4+dfsg-2) ...
+Setting up libfcgi0t64:arm64 (2.4.5-0.1) ...
+Setting up libhtml-tagset-perl (3.24-1) ...
+Setting up liblwp-mediatypes-perl (6.04-2) ...
+Setting up libfcgi-bin (2.4.5-0.1) ...
+Setting up liblzo2-2:arm64 (2.10-3+b1) ...
+Setting up libencode-locale-perl (1.05-3) ...
+Setting up libsnappy1v5:arm64 (1.2.2-1) ...
+Setting up socat (1.8.0.3-1) ...
+Setting up libncurses6:arm64 (6.5+20250216-2) ...
+Setting up libio-compress-brotli-perl (0.004001-2+b3) ...
+Setting up libio-html-perl (1.004-3) ...
+Setting up libmariadb3:arm64 (1:11.8.6-0+deb13u1) ...
+Setting up lsof (4.99.4+dfsg-2) ...
+Setting up libtimedate-perl (2.3300-2) ...
+Setting up libpcre2-posix3:arm64 (10.46-1~deb13u1) ...
+Setting up libaio1t64:arm64 (0.3.113-8+b1) ...
+Setting up pv (1.9.31-1) ...
+Setting up libfcgi-perl (0.82+ds-3+b2) ...
+Setting up libterm-readkey-perl (2.38-2+b4) ...
+Setting up liburing2:arm64 (2.9-1) ...
+Setting up liburi-perl (5.30-1) ...
+Setting up libdbi-perl:arm64 (1.647-1) ...
+Setting up libhttp-date-perl (6.06-1) ...
+Setting up mariadb-client-core (1:11.8.6-0+deb13u1) ...
+Setting up libdbd-mariadb-perl (1.22-1+b4) ...
+Setting up libhtml-parser-perl:arm64 (3.83-1+b2) ...
+Setting up mariadb-server-core (1:11.8.6-0+deb13u1) ...
+Setting up libhttp-message-perl (7.00-2) ...
+Setting up mariadb-client (1:11.8.6-0+deb13u1) ...
+Setting up mariadb-plugin-provider-lz4 (1:11.8.6-0+deb13u1) ...
+Setting up mariadb-plugin-provider-snappy (1:11.8.6-0+deb13u1) ...
+Setting up libcgi-pm-perl (4.68-1) ...
+Setting up libhtml-template-perl (2.97-2) ...
+Setting up mariadb-server (1:11.8.6-0+deb13u1) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/mariadb.service' → '/usr/lib/systemd/system/mariadb.service'.
+Setting up mariadb-plugin-provider-bzip2 (1:11.8.6-0+deb13u1) ...
+Setting up mariadb-plugin-provider-lzma (1:11.8.6-0+deb13u1) ...
+Setting up mariadb-plugin-provider-lzo (1:11.8.6-0+deb13u1) ...
+Setting up libcgi-fast-perl (1:2.17-1) ...
+Processing triggers for man-db (2.13.1-1) ...
+Processing triggers for libc-bin (2.41-12+rpt1+deb13u2) ...
+Processing triggers for mariadb-server (1:11.8.6-0+deb13u1) ...
+faro@BunweServer:~ $ sudo mysql_secure_installation
+sudo: mysql_secure_installation: command not found
+faro@BunweServer:~ $ sudo mysql_secure_installation
+sudo: mysql_secure_installation: command not found
+faro@BunweServer:~ $ sudo mysql_secure_installation
+sudo: mysql_secure_installation: command not found
+faro@BunweServer:~ $ sudo mysql_secure_installation
+sudo: mysql_secure_installation: command not found
+faro@BunweServer:~ $ sudo mariadb-secure-installation
+
+NOTE: MariaDB is secure by default in Debian. Running this script is
+      useless at best, and misleading at worst. This script will be
+      removed in a future MariaDB release in Debian. Please read
+      /usr/share/doc/mariadb-server/README.Debian.gz for details.
+
+Enter root user password or leave blank:
+
+Enter current password for root (enter for none):
+OK, successfully used password, moving on...
+
+Setting the root password or using the unix_socket ensures that nobody
+can log into the MariaDB root user without the proper authorisation.
+
+You already have your root account protected, so you can safely answer 'n'.
+
+Switch to unix_socket authentication [Y/n] n
+ ... skipping.
+
+You already have your root account protected, so you can safely answer 'n'.
+
+Change the root password? [Y/n] y
+New password:
+Re-enter new password:
+Password updated successfully!
+Reloading privilege tables..
+ ... Success!
+
+
+By default, a MariaDB installation has an anonymous user, allowing anyone
+to log into MariaDB without having to have a user account created for
+them.  This is intended only for testing, and to make the installation
+go a bit smoother.  You should remove them before moving into a
+production environment.
+
+Remove anonymous users? [Y/n] y
+SQL executed without errors!
+The operation might have been successful, or it might have not done anything.
+
+Normally, root should only be allowed to connect from 'localhost'.  This
+ensures that someone cannot guess at the root password from the network.
+
+Disallow root login remotely? [Y/n] y
+SQL executed without errors!
+The operation might have been successful, or it might have not done anything.
+
+By default, MariaDB comes with a database named 'test' that anyone can
+access.  This is also intended only for testing, and should be removed
+before moving into a production environment.
+
+Remove test database and access to it? [Y/n] y
+ - Dropping test database...
+SQL executed without errors!
+The operation might have been successful, or it might have not done anything.
+ - Removing privileges on test database...
+SQL executed without errors!
+The operation might have been successful, or it might have not done anything.
+
+Reloading the privilege tables will ensure that all changes made so far
+will take effect immediately.
+
+Reload privilege tables now? [Y/n] y
+ ... Success!
+
+Cleaning up...
+
+All done!  If you've completed all of the above steps, your MariaDB
+installation should now be secure.
+
+Thanks for using MariaDB!
+faro@BunweServer:~ $ sudo mariadb -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 39
+Server version: 11.8.6-MariaDB-0+deb13u1 from Debian -- Please help get to 10k stars at https://github.com/MariaDB/Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE DATABASE bunwe_app
+    -> CREATE USER 'faro'@'localhost
+[1]+  Stopped                 sudo mariadb -u root -p
+faro@BunweServer:~ $ sudo mariadb -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 40
+Server version: 11.8.6-MariaDB-0+deb13u1 from Debian -- Please help get to 10k stars at https://github.com/MariaDB/Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE DATABASE bunwe_app;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> CREATE USER 'faro'@'%' IDENTIFIED BY 'faro_bunwe2026';
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON bunwe_app.* TO 'faro'@'%';
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [(none)]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.002 sec)
+
+MariaDB [(none)]> exit;
+Bye
+faro@BunweServer:~ $ sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+faro@BunweServer:~ $ sudo systemctl restart mariadb
+faro@BunweServer:~ $ sudo mariadb -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 32
+Server version: 11.8.6-MariaDB-0+deb13u1 from Debian -- Please help get to 10k stars at https://github.com/MariaDB/Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> exit;
+Bye
+faro@BunweServer:~ $ mariadb -u faro -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 37
+Server version: 11.8.6-MariaDB-0+deb13u1 from Debian -- Please help get to 10k stars at https://github.com/MariaDB/Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> USE bunwe_app;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [bunwe_app]> SHOW TABLES;
++---------------------+
+| Tables_in_bunwe_app |
++---------------------+
+| TEST                |
++---------------------+
+1 row in set (0.001 sec)
+
+MariaDB [bunwe_app]> DESCRIBE TEST;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| id    | decimal(20,0) | NO   | PRI | NULL    |       |
+| name  | varchar(30)   | NO   |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+2 rows in set (0.002 sec)
+
+MariaDB [bunwe_app]> EXIT;
+Bye
+faro@BunweServer:~ $ mariadb -u faro -p
+Enter password:
+ERROR 1045 (28000): Access denied for user 'faro'@'localhost' (using password: YES)
+faro@BunweServer:~ $ mariadb -u faro -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 39
+Server version: 11.8.6-MariaDB-0+deb13u1 from Debian -- Please help get to 10k stars at https://github.com/MariaDB/Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> USE bunwe_app
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [bunwe_app]> SELECT * FROM TEST
+    ->
+[2]+  Stopped                 mariadb -u faro -p
+faro@BunweServer:~ $ mariadb -u faro -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 40
+Server version: 11.8.6-MariaDB-0+deb13u1 from Debian -- Please help get to 10k stars at https://github.com/MariaDB/Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> USE bunwe_app
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [bunwe_app]> SELECT * FROM TEST;
++----+--------+
+| id | name   |
++----+--------+
+| 14 | Alonso |
++----+--------+
+1 row in set (0.001 sec)
+
+MariaDB [bunwe_app]> SHOW TABLES;
++---------------------+
+| Tables_in_bunwe_app |
++---------------------+
+| TEST                |
++---------------------+
+1 row in set (0.001 sec)
+
+MariaDB [bunwe_app]> DESCRIBE TEST;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| id    | decimal(20,0) | NO   | PRI | NULL    |       |
+| name  | varchar(30)   | NO   |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+2 rows in set (0.002 sec)
+
+MariaDB [bunwe_app]> EXIT;
+Bye
+faro@BunweServer:~ $ sudo apt install python3-pip python3-venv -y
+[sudo] password for faro:
+python3-venv is already the newest version (3.13.5-1).
+The following packages were automatically installed and are no longer required:
+  libdrm-amdgpu1  libegl1  libgles2   libllvm19          libsensors5         libwayland-server0  libxcb-dri3-0    libxcb-randr0  libxcb-sync1    libxshmfence1  mesa-libgallium
+  libegl-mesa0    libgbm1  libglvnd0  libsensors-config  libwayland-client0  libx11-xcb1         libxcb-present0  libxcb-shm0    libxcb-xfixes0  libz3-4
+Use 'sudo apt autoremove' to remove them.
+
+Installing:
+  python3-pip
+
+Installing dependencies:
+  javascript-common  libjs-jquery     libjs-underscore  libpython3.13-dev  python3-packaging  python3.13-dev
+  libexpat1-dev      libjs-sphinxdoc  libpython3-dev    python3-dev        python3-wheel      zlib1g-dev
+
+Suggested packages:
+  apache2  | lighttpd  | httpd  python3-setuptools
+
+Summary:
+  Upgrading: 0, Installing: 13, Removing: 0, Not Upgrading: 0
+  Download size: 9,350 kB
+  Space needed: 40.7 MB / 24.5 GB available
+
+Get:1 http://deb.debian.org/debian trixie/main arm64 javascript-common all 12+nmu1 [4,864 B]
+Get:2 http://deb.debian.org/debian trixie/main arm64 libexpat1-dev arm64 2.7.1-2 [145 kB]
+Get:3 http://deb.debian.org/debian trixie/main arm64 libjs-jquery all 3.6.1+dfsg+~3.5.14-1 [326 kB]
+Get:4 http://deb.debian.org/debian trixie/main arm64 libjs-underscore all 1.13.4~dfsg+~1.11.4-3 [116 kB]
+Get:5 http://deb.debian.org/debian trixie/main arm64 libjs-sphinxdoc all 8.1.3-5 [30.5 kB]
+Get:6 http://deb.debian.org/debian trixie/main arm64 zlib1g-dev arm64 1:1.3.dfsg+really1.3.1-1+b1 [917 kB]
+Get:7 http://deb.debian.org/debian trixie/main arm64 libpython3.13-dev arm64 3.13.5-2+deb13u2 [4,926 kB]
+Get:8 http://deb.debian.org/debian trixie/main arm64 libpython3-dev arm64 3.13.5-1 [10.4 kB]
+Get:9 http://deb.debian.org/debian trixie/main arm64 python3.13-dev arm64 3.13.5-2+deb13u2 [504 kB]
+Get:10 http://deb.debian.org/debian trixie/main arm64 python3-dev arm64 3.13.5-1 [26.1 kB]
+Get:11 http://deb.debian.org/debian trixie/main arm64 python3-packaging all 25.0-1 [56.6 kB]
+Get:12 http://deb.debian.org/debian trixie/main arm64 python3-wheel all 0.46.1-2 [21.7 kB]
+Get:13 http://archive.raspberrypi.com/debian trixie/main arm64 python3-pip all 25.1.1+dfsg-1+rpt1 [2,266 kB]
+Fetched 9,350 kB in 3s (3,587 kB/s)
+Selecting previously unselected package javascript-common.
+(Reading database ... 88618 files and directories currently installed.)
+Preparing to unpack .../00-javascript-common_12+nmu1_all.deb ...
+Unpacking javascript-common (12+nmu1) ...
+Selecting previously unselected package libexpat1-dev:arm64.
+Preparing to unpack .../01-libexpat1-dev_2.7.1-2_arm64.deb ...
+Unpacking libexpat1-dev:arm64 (2.7.1-2) ...
+Selecting previously unselected package libjs-jquery.
+Preparing to unpack .../02-libjs-jquery_3.6.1+dfsg+~3.5.14-1_all.deb ...
+Unpacking libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
+Selecting previously unselected package libjs-underscore.
+Preparing to unpack .../03-libjs-underscore_1.13.4~dfsg+~1.11.4-3_all.deb ...
+Unpacking libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
+Selecting previously unselected package libjs-sphinxdoc.
+Preparing to unpack .../04-libjs-sphinxdoc_8.1.3-5_all.deb ...
+Unpacking libjs-sphinxdoc (8.1.3-5) ...
+Selecting previously unselected package zlib1g-dev:arm64.
+Preparing to unpack .../05-zlib1g-dev_1%3a1.3.dfsg+really1.3.1-1+b1_arm64.deb ...
+Unpacking zlib1g-dev:arm64 (1:1.3.dfsg+really1.3.1-1+b1) ...
+Selecting previously unselected package libpython3.13-dev:arm64.
+Preparing to unpack .../06-libpython3.13-dev_3.13.5-2+deb13u2_arm64.deb ...
+Unpacking libpython3.13-dev:arm64 (3.13.5-2+deb13u2) ...
+Selecting previously unselected package libpython3-dev:arm64.
+Preparing to unpack .../07-libpython3-dev_3.13.5-1_arm64.deb ...
+Unpacking libpython3-dev:arm64 (3.13.5-1) ...
+Selecting previously unselected package python3.13-dev.
+Preparing to unpack .../08-python3.13-dev_3.13.5-2+deb13u2_arm64.deb ...
+Unpacking python3.13-dev (3.13.5-2+deb13u2) ...
+Selecting previously unselected package python3-dev.
+Preparing to unpack .../09-python3-dev_3.13.5-1_arm64.deb ...
+Unpacking python3-dev (3.13.5-1) ...
+Selecting previously unselected package python3-packaging.
+Preparing to unpack .../10-python3-packaging_25.0-1_all.deb ...
+Unpacking python3-packaging (25.0-1) ...
+Selecting previously unselected package python3-wheel.
+Preparing to unpack .../11-python3-wheel_0.46.1-2_all.deb ...
+Unpacking python3-wheel (0.46.1-2) ...
+Selecting previously unselected package python3-pip.
+Preparing to unpack .../12-python3-pip_25.1.1+dfsg-1+rpt1_all.deb ...
+Unpacking python3-pip (25.1.1+dfsg-1+rpt1) ...
+Setting up javascript-common (12+nmu1) ...
+Setting up python3-packaging (25.0-1) ...
+Setting up libexpat1-dev:arm64 (2.7.1-2) ...
+Setting up zlib1g-dev:arm64 (1:1.3.dfsg+really1.3.1-1+b1) ...
+Setting up libjs-jquery (3.6.1+dfsg+~3.5.14-1) ...
+Setting up libjs-underscore (1.13.4~dfsg+~1.11.4-3) ...
+Setting up python3-wheel (0.46.1-2) ...
+Setting up libpython3.13-dev:arm64 (3.13.5-2+deb13u2) ...
+Setting up python3-pip (25.1.1+dfsg-1+rpt1) ...
+Setting up libjs-sphinxdoc (8.1.3-5) ...
+Setting up libpython3-dev:arm64 (3.13.5-1) ...
+Setting up python3.13-dev (3.13.5-2+deb13u2) ...
+Setting up python3-dev (3.13.5-1) ...
+Processing triggers for man-db (2.13.1-1) ...
+faro@BunweServer:~ $ mkdir ~/sleep-api && cd ~/sleep-api
+faro@BunweServer:~/sleep-api $ python3 -m venv venv
+faro@BunweServer:~/sleep-api $ source venv/bin/activate
+(venv) faro@BunweServer:~/sleep-api $ pip install "fastapi[standard]" PyMySQL
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Collecting PyMySQL
+  Downloading https://www.piwheels.org/simple/pymysql/pymysql-1.2.0-py3-none-any.whl.metadata (4.3 kB)
+Collecting fastapi[standard]
+  Downloading https://www.piwheels.org/simple/fastapi/fastapi-0.136.3-py3-none-any.whl.metadata (27 kB)
+Collecting starlette>=0.46.0 (from fastapi[standard])
+  Downloading https://www.piwheels.org/simple/starlette/starlette-1.2.0-py3-none-any.whl.metadata (6.3 kB)
+Collecting pydantic>=2.9.0 (from fastapi[standard])
+  Downloading https://www.piwheels.org/simple/pydantic/pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+Collecting typing-extensions>=4.8.0 (from fastapi[standard])
+  Downloading https://www.piwheels.org/simple/typing-extensions/typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting typing-inspection>=0.4.2 (from fastapi[standard])
+  Downloading https://www.piwheels.org/simple/typing-inspection/typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+Collecting annotated-doc>=0.0.2 (from fastapi[standard])
+  Downloading https://www.piwheels.org/simple/annotated-doc/annotated_doc-0.0.4-py3-none-any.whl.metadata (6.6 kB)
+Collecting fastapi-cli>=0.0.8 (from fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/fastapi-cli/fastapi_cli-0.0.24-py3-none-any.whl.metadata (6.4 kB)
+Collecting fastar>=0.9.0 (from fastapi[standard])
+  Downloading fastar-0.11.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (4.0 kB)
+Collecting httpx<1.0.0,>=0.23.0 (from fastapi[standard])
+  Downloading https://www.piwheels.org/simple/httpx/httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting jinja2>=3.1.5 (from fastapi[standard])
+  Downloading https://www.piwheels.org/simple/jinja2/jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting python-multipart>=0.0.18 (from fastapi[standard])
+  Downloading https://www.piwheels.org/simple/python-multipart/python_multipart-0.0.29-py3-none-any.whl.metadata (2.1 kB)
+Collecting email-validator>=2.0.0 (from fastapi[standard])
+  Downloading https://www.piwheels.org/simple/email-validator/email_validator-2.3.0-py3-none-any.whl.metadata (26 kB)
+Collecting uvicorn>=0.12.0 (from uvicorn[standard]>=0.12.0; extra == "standard"->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/uvicorn/uvicorn-0.48.0-py3-none-any.whl.metadata (6.7 kB)
+Collecting pydantic-settings>=2.0.0 (from fastapi[standard])
+  Downloading https://www.piwheels.org/simple/pydantic-settings/pydantic_settings-2.14.1-py3-none-any.whl.metadata (3.4 kB)
+Collecting pydantic-extra-types>=2.0.0 (from fastapi[standard])
+  Downloading https://www.piwheels.org/simple/pydantic-extra-types/pydantic_extra_types-2.11.1-py3-none-any.whl.metadata (4.2 kB)
+Collecting anyio (from httpx<1.0.0,>=0.23.0->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/anyio/anyio-4.13.0-py3-none-any.whl.metadata (4.5 kB)
+Collecting certifi (from httpx<1.0.0,>=0.23.0->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/certifi/certifi-2026.5.20-py3-none-any.whl.metadata (2.5 kB)
+Collecting httpcore==1.* (from httpx<1.0.0,>=0.23.0->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/httpcore/httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting idna (from httpx<1.0.0,>=0.23.0->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/idna/idna-3.17-py3-none-any.whl.metadata (6.4 kB)
+Collecting h11>=0.16 (from httpcore==1.*->httpx<1.0.0,>=0.23.0->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/h11/h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting dnspython>=2.0.0 (from email-validator>=2.0.0->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/dnspython/dnspython-2.8.0-py3-none-any.whl.metadata (5.7 kB)
+Collecting typer>=0.16.0 (from fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/typer/typer-0.26.3-py3-none-any.whl.metadata (16 kB)
+Collecting rich-toolkit>=0.14.8 (from fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/rich-toolkit/rich_toolkit-0.19.10-py3-none-any.whl.metadata (1.0 kB)
+Collecting fastapi-cloud-cli>=0.1.1 (from fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/fastapi-cloud-cli/fastapi_cloud_cli-0.18.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting rignore>=0.5.1 (from fastapi-cloud-cli>=0.1.1->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading rignore-0.7.6-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (4.2 kB)
+Collecting sentry-sdk>=2.20.0 (from fastapi-cloud-cli>=0.1.1->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/sentry-sdk/sentry_sdk-2.61.0-py3-none-any.whl.metadata (10 kB)
+Collecting detect-installer>=0.1.0 (from fastapi-cloud-cli>=0.1.1->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading https://archive1.piwheels.org/simple/detect-installer/detect_installer-0.1.0-py3-none-any.whl.metadata (1.2 kB)
+Collecting MarkupSafe>=2.0 (from jinja2>=3.1.5->fastapi[standard])
+  Downloading markupsafe-3.0.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (2.7 kB)
+Collecting annotated-types>=0.6.0 (from pydantic>=2.9.0->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/annotated-types/annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.46.4 (from pydantic>=2.9.0->fastapi[standard])
+  Downloading pydantic_core-2.46.4-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (6.6 kB)
+Collecting python-dotenv>=0.21.0 (from pydantic-settings>=2.0.0->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/python-dotenv/python_dotenv-1.2.2-py3-none-any.whl.metadata (27 kB)
+Collecting click>=8.1.7 (from rich-toolkit>=0.14.8->fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/click/click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+Collecting rich>=13.7.1 (from rich-toolkit>=0.14.8->fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/rich/rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+Collecting markdown-it-py>=2.2.0 (from rich>=13.7.1->rich-toolkit>=0.14.8->fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/markdown-it-py/markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting pygments<3.0.0,>=2.13.0 (from rich>=13.7.1->rich-toolkit>=0.14.8->fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/pygments/pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.7.1->rich-toolkit>=0.14.8->fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/mdurl/mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+Collecting urllib3>=1.26.11 (from sentry-sdk>=2.20.0->fastapi-cloud-cli>=0.1.1->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/urllib3/urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
+Collecting shellingham>=1.3.0 (from typer>=0.16.0->fastapi-cli>=0.0.8->fastapi-cli[standard]>=0.0.8; extra == "standard"->fastapi[standard])
+  Downloading https://www.piwheels.org/simple/shellingham/shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
+Collecting httptools>=0.6.3 (from uvicorn[standard]>=0.12.0; extra == "standard"->fastapi[standard])
+  Downloading httptools-0.8.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (3.5 kB)
+Collecting pyyaml>=5.1 (from uvicorn[standard]>=0.12.0; extra == "standard"->fastapi[standard])
+  Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (2.4 kB)
+Collecting uvloop>=0.15.1 (from uvicorn[standard]>=0.12.0; extra == "standard"->fastapi[standard])
+  Downloading uvloop-0.22.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (4.9 kB)
+Collecting watchfiles>=0.20 (from uvicorn[standard]>=0.12.0; extra == "standard"->fastapi[standard])
+  Downloading watchfiles-1.2.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (4.9 kB)
+Collecting websockets>=10.4 (from uvicorn[standard]>=0.12.0; extra == "standard"->fastapi[standard])
+  Downloading websockets-16.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (6.8 kB)
+Downloading https://www.piwheels.org/simple/fastapi/fastapi-0.136.3-py3-none-any.whl (117 kB)
+Downloading https://www.piwheels.org/simple/httpx/httpx-0.28.1-py3-none-any.whl (73 kB)
+Downloading https://www.piwheels.org/simple/httpcore/httpcore-1.0.9-py3-none-any.whl (78 kB)
+Downloading https://www.piwheels.org/simple/pymysql/pymysql-1.2.0-py3-none-any.whl (45 kB)
+Downloading https://www.piwheels.org/simple/annotated-doc/annotated_doc-0.0.4-py3-none-any.whl (5.3 kB)
+Downloading https://www.piwheels.org/simple/email-validator/email_validator-2.3.0-py3-none-any.whl (35 kB)
+Downloading https://www.piwheels.org/simple/dnspython/dnspython-2.8.0-py3-none-any.whl (331 kB)
+Downloading https://www.piwheels.org/simple/fastapi-cli/fastapi_cli-0.0.24-py3-none-any.whl (12 kB)
+Downloading https://www.piwheels.org/simple/fastapi-cloud-cli/fastapi_cloud_cli-0.18.0-py3-none-any.whl (37 kB)
+Downloading https://archive1.piwheels.org/simple/detect-installer/detect_installer-0.1.0-py3-none-any.whl (4.5 kB)
+Downloading fastar-0.11.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (760 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 760.2/760.2 kB 7.7 MB/s eta 0:00:00
+Downloading https://www.piwheels.org/simple/h11/h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading https://www.piwheels.org/simple/idna/idna-3.17-py3-none-any.whl (65 kB)
+Downloading https://www.piwheels.org/simple/jinja2/jinja2-3.1.6-py3-none-any.whl (134 kB)
+Downloading markupsafe-3.0.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (24 kB)
+Downloading https://www.piwheels.org/simple/pydantic/pydantic-2.13.4-py3-none-any.whl (472 kB)
+Downloading pydantic_core-2.46.4-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (2.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 8.8 MB/s eta 0:00:00
+Downloading https://www.piwheels.org/simple/annotated-types/annotated_types-0.7.0-py3-none-any.whl (13 kB)
+Downloading https://www.piwheels.org/simple/pydantic-extra-types/pydantic_extra_types-2.11.1-py3-none-any.whl (79 kB)
+Downloading https://www.piwheels.org/simple/pydantic-settings/pydantic_settings-2.14.1-py3-none-any.whl (60 kB)
+Downloading https://www.piwheels.org/simple/python-dotenv/python_dotenv-1.2.2-py3-none-any.whl (22 kB)
+Downloading https://www.piwheels.org/simple/python-multipart/python_multipart-0.0.29-py3-none-any.whl (29 kB)
+Downloading https://www.piwheels.org/simple/rich-toolkit/rich_toolkit-0.19.10-py3-none-any.whl (33 kB)
+Downloading https://www.piwheels.org/simple/click/click-8.4.1-py3-none-any.whl (116 kB)
+Downloading https://www.piwheels.org/simple/rich/rich-15.0.0-py3-none-any.whl (310 kB)
+Downloading https://www.piwheels.org/simple/pygments/pygments-2.20.0-py3-none-any.whl (1.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 3.3 MB/s eta 0:00:00
+Downloading https://www.piwheels.org/simple/markdown-it-py/markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+Downloading https://www.piwheels.org/simple/mdurl/mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+Downloading rignore-0.7.6-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (897 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 897.4/897.4 kB 6.4 MB/s eta 0:00:00
+Downloading https://www.piwheels.org/simple/sentry-sdk/sentry_sdk-2.61.0-py3-none-any.whl (483 kB)
+Downloading https://www.piwheels.org/simple/starlette/starlette-1.2.0-py3-none-any.whl (73 kB)
+Downloading https://www.piwheels.org/simple/anyio/anyio-4.13.0-py3-none-any.whl (114 kB)
+Downloading https://www.piwheels.org/simple/typer/typer-0.26.3-py3-none-any.whl (122 kB)
+Downloading https://www.piwheels.org/simple/shellingham/shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+Downloading https://www.piwheels.org/simple/typing-extensions/typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+Downloading https://www.piwheels.org/simple/typing-inspection/typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+Downloading https://www.piwheels.org/simple/urllib3/urllib3-2.7.0-py3-none-any.whl (131 kB)
+Downloading https://www.piwheels.org/simple/uvicorn/uvicorn-0.48.0-py3-none-any.whl (71 kB)
+Downloading httptools-0.8.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (482 kB)
+Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (767 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 767.1/767.1 kB 8.5 MB/s eta 0:00:00
+Downloading uvloop-0.22.1-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (4.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.3/4.3 MB 9.9 MB/s eta 0:00:00
+Downloading watchfiles-1.2.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (452 kB)
+Downloading websockets-16.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (186 kB)
+Downloading https://www.piwheels.org/simple/certifi/certifi-2026.5.20-py3-none-any.whl (134 kB)
+Installing collected packages: websockets, uvloop, urllib3, typing-extensions, shellingham, rignore, pyyaml, python-multipart, python-dotenv, PyMySQL, pygments, mdurl, MarkupSafe, idna, httptools, h11, fastar, dnspython, detect-installer, click, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, sentry-sdk, pydantic-core, markdown-it-py, jinja2, httpcore, email-validator, anyio, watchfiles, starlette, rich, pydantic, httpx, typer, rich-toolkit, pydantic-settings, pydantic-extra-types, fastapi, fastapi-cloud-cli, fastapi-cli
+Successfully installed MarkupSafe-3.0.3 PyMySQL-1.2.0 annotated-doc-0.0.4 annotated-types-0.7.0 anyio-4.13.0 certifi-2026.5.20 click-8.4.1 detect-installer-0.1.0 dnspython-2.8.0 email-validator-2.3.0 fastapi-0.136.3 fastapi-cli-0.0.24 fastapi-cloud-cli-0.18.0 fastar-0.11.0 h11-0.16.0 httpcore-1.0.9 httptools-0.8.0 httpx-0.28.1 idna-3.17 jinja2-3.1.6 markdown-it-py-4.2.0 mdurl-0.1.2 pydantic-2.13.4 pydantic-core-2.46.4 pydantic-extra-types-2.11.1 pydantic-settings-2.14.1 pygments-2.20.0 python-dotenv-1.2.2 python-multipart-0.0.29 pyyaml-6.0.3 rich-15.0.0 rich-toolkit-0.19.10 rignore-0.7.6 sentry-sdk-2.61.0 shellingham-1.5.4 starlette-1.2.0 typer-0.26.3 typing-extensions-4.15.0 typing-inspection-0.4.2 urllib3-2.7.0 uvicorn-0.48.0 uvloop-0.22.1 watchfiles-1.2.0 websockets-16.0
+(venv) faro@BunweServer:~/sleep-api $
+(venv) faro@BunweServer:~/sleep-api $ from fastapi import FastAPI
+-bash: from: command not found
+(venv) faro@BunweServer:~/sleep-api $ nano apiconfig.py
+(venv) faro@BunweServer:~/sleep-api $ uvicorn apiconfig:app --host 0.0.0.0 --port 8000 --reload
+INFO:     Will watch for changes in these directories: ['/home/faro/sleep-api']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [2866] using WatchFiles
+INFO:     Started server process [2868]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     192.168.100.165:53841 - "GET /docs HTTP/1.1" 200 OK
+INFO:     192.168.100.165:53841 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     192.168.100.165:64191 - "GET /historial HTTP/1.1" 200 OK
+INFO:     192.168.100.165:63256 - "GET /historial HTTP/1.1" 200 OK
+^Z
+[3]+  Stopped                 uvicorn apiconfig:app --host 0.0.0.0 --port 8000 --reload
+(venv) faro@BunweServer:~/sleep-api $ nano apiconfig.py
+(venv) faro@BunweServer:~/sleep-api $ exit
+logout
+There are stopped jobs.
+(venv) faro@BunweServer:~/sleep-api $ exit
+logout
+INFO:     Shutting down
+Connection to bunweserver.local closed.
+
+kuroi@PC-Alonso MINGW64 ~
+$ ssh faro@BunweServer.local
+faro@bunweserver.local's password:
+Linux BunweServer 6.18.29+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.18.29-1+rpt1 (2026-05-12) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri May 29 21:11:14 2026 from 2803:c180:2101:8456:1498:6f3:689b:8747
+faro@BunweServer:~ $ cd ~/sleep-api && source venv/bin/activate
+(venv) faro@BunweServer:~/sleep-api $ uvicorn apiconfig:app --host 0.0.0.0 --port 8000 --reload
+INFO:     Will watch for changes in these directories: ['/home/faro/sleep-api']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [2907] using WatchFiles
+INFO:     Started server process [2909]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+^Z
+[1]+  Stopped                 uvicorn apiconfig:app --host 0.0.0.0 --port 8000 --reload
+(venv) faro@BunweServer:~/sleep-api $ exit
+logout
+There are stopped jobs.
+(venv) faro@BunweServer:~/sleep-api $ exit
+logout
+INFO:     Shutting down
+Connection to bunweserver.local closed.
+
+kuroi@PC-Alonso MINGW64 ~
+$ ssh faro@BunweServer.local
+faro@bunweserver.local's password:
+Linux BunweServer 6.18.29+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.18.29-1+rpt1 (2026-05-12) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri May 29 22:39:17 2026 from 2803:c180:2101:8456:1498:6f3:689b:8747
+faro@BunweServer:~ $ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            1.6G     0  1.6G   0% /dev
+tmpfs           760M  9.0M  751M   2% /run
+/dev/mmcblk0p2   29G  4.8G   23G  18% /
+tmpfs           1.9G     0  1.9G   0% /dev/shm
+tmpfs           5.0M   16K  5.0M   1% /run/lock
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+tmpfs           1.9G     0  1.9G   0% /tmp
+/dev/mmcblk0p1  505M   66M  439M  14% /boot/firmware
+tmpfs           1.0M     0  1.0M   0% /run/credentials/getty@tty1.service
+tmpfs           1.0M     0  1.0M   0% /run/credentials/serial-getty@ttyS0.service
+tmpfs           380M  8.0K  380M   1% /run/user/1000
+faro@BunweServer:~ $ sudo nano /etc/systemd/system/sleep-api.service
+[sudo] password for faro:
+faro@BunweServer:~ $ sudo systemctl daemon-reload
+faro@BunweServer:~ $ sudo systemctl enable sleep-api
+Created symlink '/etc/systemd/system/multi-user.target.wants/sleep-api.service' → '/etc/systemd/system/sleep-api.service'.
+faro@BunweServer:~ $ sudo systemctl start sleep-api
+faro@BunweServer:~ $ sudo systemctl status sleep-api
+● sleep-api.service - Sleep App FastAPI Server
+     Loaded: loaded (/etc/systemd/system/sleep-api.service; enabled; preset: enabled)
+     Active: active (running) since Fri 2026-05-29 22:52:23 -04; 8s ago
+ Invocation: 67986d0f39044e5890b8211cafbd9141
+   Main PID: 3139 (uvicorn)
+      Tasks: 6 (limit: 3967)
+        CPU: 1.236s
+     CGroup: /system.slice/sleep-api.service
+             └─3139 /home/faro/sleep-api/venv/bin/python3 /home/faro/sleep-api/venv/bin/uvicorn apiconfig:app --host 0.0.0.0 --port 8000
+
+May 29 22:52:23 BunweServer systemd[1]: Started sleep-api.service - Sleep App FastAPI Server.
+May 29 22:52:25 BunweServer uvicorn[3139]: INFO:     Started server process [3139]
+May 29 22:52:25 BunweServer uvicorn[3139]: INFO:     Waiting for application startup.
+May 29 22:52:25 BunweServer uvicorn[3139]: INFO:     Application startup complete.
+May 29 22:52:25 BunweServer uvicorn[3139]: INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+faro@BunweServer:~ $ curl -fsSL https://tailscale.com/install.sh | sh
+Installing Tailscale for debian trixie, using method apt
++ sudo mkdir -p --mode=0755 /usr/share/keyrings
++ curl -fsSL https://pkgs.tailscale.com/stable/debian/trixie.noarmor.gpg
++ sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg
++ sudo chmod 0644 /usr/share/keyrings/tailscale-archive-keyring.gpg
++ curl -fsSL https://pkgs.tailscale.com/stable/debian/trixie.tailscale-keyring.list
++ sudo tee /etc/apt/sources.list.d/tailscale.list
+# Tailscale packages for debian trixie
+deb [signed-by=/usr/share/keyrings/tailscale-archive-keyring.gpg] https://pkgs.tailscale.com/stable/debian trixie main
++ sudo chmod 0644 /etc/apt/sources.list.d/tailscale.list
++ sudo apt-get update
+Hit:1 http://deb.debian.org/debian trixie InRelease
+Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+Hit:3 http://deb.debian.org/debian-security trixie-security InRelease
+Get:4 https://pkgs.tailscale.com/stable/debian trixie InRelease
+Get:5 https://pkgs.tailscale.com/stable/debian trixie/main armhf Packages [14.6 kB]
+Get:6 https://pkgs.tailscale.com/stable/debian trixie/main all Packages [354 B]
+Get:7 https://pkgs.tailscale.com/stable/debian trixie/main arm64 Packages [14.7 kB]
+Hit:8 http://archive.raspberrypi.com/debian trixie InRelease
+Fetched 83.6 kB in 1s (84.7 kB/s)
+Reading package lists... Done
++ [ -n  ]
++ sudo apt-get install -y tailscale tailscale-archive-keyring
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libdrm-amdgpu1 libegl-mesa0 libegl1 libgbm1 libgles2 libglvnd0 libllvm19 libsensors-config libsensors5 libwayland-client0 libwayland-server0 libx11-xcb1 libxcb-dri3-0 libxcb-present0
+  libxcb-randr0 libxcb-shm0 libxcb-sync1 libxcb-xfixes0 libxshmfence1 libz3-4 mesa-libgallium
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  iptables libip4tc2 libip6tc2
+Suggested packages:
+  firewalld
+The following NEW packages will be installed:
+  iptables libip4tc2 libip6tc2 tailscale tailscale-archive-keyring
+0 upgraded, 5 newly installed, 0 to remove and 0 not upgraded.
+Need to get 34.6 MB of archives.
+After this operation, 76.9 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian trixie/main arm64 libip4tc2 arm64 1.8.11-2 [19.6 kB]
+Get:2 http://deb.debian.org/debian trixie/main arm64 libip6tc2 arm64 1.8.11-2 [19.8 kB]
+Get:3 http://deb.debian.org/debian trixie/main arm64 iptables arm64 1.8.11-2 [354 kB]
+Get:4 https://pkgs.tailscale.com/stable/debian trixie/main arm64 tailscale arm64 1.98.4 [34.2 MB]
+Get:5 https://pkgs.tailscale.com/stable/debian trixie/main all tailscale-archive-keyring all 1.35.181 [3,082 B]
+Fetched 34.6 MB in 3s (13.6 MB/s)
+Selecting previously unselected package libip4tc2:arm64.
+(Reading database ... 89877 files and directories currently installed.)
+Preparing to unpack .../libip4tc2_1.8.11-2_arm64.deb ...
+Unpacking libip4tc2:arm64 (1.8.11-2) ...
+Selecting previously unselected package libip6tc2:arm64.
+Preparing to unpack .../libip6tc2_1.8.11-2_arm64.deb ...
+Unpacking libip6tc2:arm64 (1.8.11-2) ...
+Selecting previously unselected package iptables.
+Preparing to unpack .../iptables_1.8.11-2_arm64.deb ...
+Unpacking iptables (1.8.11-2) ...
+Selecting previously unselected package tailscale.
+Preparing to unpack .../tailscale_1.98.4_arm64.deb ...
+Unpacking tailscale (1.98.4) ...
+Selecting previously unselected package tailscale-archive-keyring.
+Preparing to unpack .../tailscale-archive-keyring_1.35.181_all.deb ...
+Unpacking tailscale-archive-keyring (1.35.181) ...
+Setting up libip4tc2:arm64 (1.8.11-2) ...
+Setting up tailscale-archive-keyring (1.35.181) ...
+Setting up libip6tc2:arm64 (1.8.11-2) ...
+Setting up iptables (1.8.11-2) ...
+update-alternatives: using /usr/sbin/iptables-legacy to provide /usr/sbin/iptables (iptables) in auto mode
+update-alternatives: using /usr/sbin/ip6tables-legacy to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+update-alternatives: using /usr/sbin/iptables-nft to provide /usr/sbin/iptables (iptables) in auto mode
+update-alternatives: using /usr/sbin/ip6tables-nft to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+update-alternatives: using /usr/sbin/arptables-nft to provide /usr/sbin/arptables (arptables) in auto mode
+update-alternatives: using /usr/sbin/ebtables-nft to provide /usr/sbin/ebtables (ebtables) in auto mode
+Setting up tailscale (1.98.4) ...
+Created symlink '/etc/systemd/system/multi-user.target.wants/tailscaled.service' → '/usr/lib/systemd/system/tailscaled.service'.
+Processing triggers for man-db (2.13.1-1) ...
+Processing triggers for libc-bin (2.41-12+rpt1+deb13u2) ...
++ [ false = true ]
++ set +x
+Installation complete! Log in to start using Tailscale by running:
+
+sudo tailscale up
+faro@BunweServer:~ $ sudo tailscale up
+
+To authenticate, visit:
+
+        https://login.tailscale.com/a/40c11501e592
+
+Success.
+faro@BunweServer:~ $ sudo systemctl enable tailscaled
+faro@BunweServer:~ $ sudo systemctl start tailscaled
+faro@BunweServer:~ $ tailscale ip -4
+100.75.19.64
+faro@BunweServer:~ $ sudo systemctl status sleep-api
+● sleep-api.service - Sleep App FastAPI Server
+     Loaded: loaded (/etc/systemd/system/sleep-api.service; enabled; preset: enabled)
+     Active: active (running) since Fri 2026-05-29 22:52:23 -04; 27min ago
+ Invocation: 67986d0f39044e5890b8211cafbd9141
+   Main PID: 3139 (uvicorn)
+      Tasks: 6 (limit: 3967)
+        CPU: 3.364s
+     CGroup: /system.slice/sleep-api.service
+             └─3139 /home/faro/sleep-api/venv/bin/python3 /home/faro/sleep-api/venv/bin/uvicorn apiconfig:app --host 0.0.0.0 --port 8000
+
+May 29 22:52:23 BunweServer systemd[1]: Started sleep-api.service - Sleep App FastAPI Server.
+May 29 22:52:25 BunweServer uvicorn[3139]: INFO:     Started server process [3139]
+May 29 22:52:25 BunweServer uvicorn[3139]: INFO:     Waiting for application startup.
+May 29 22:52:25 BunweServer uvicorn[3139]: INFO:     Application startup complete.
+May 29 22:52:25 BunweServer uvicorn[3139]: INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+May 29 23:19:17 BunweServer uvicorn[3139]: WARNING:  Invalid HTTP request received.
+May 29 23:19:17 BunweServer uvicorn[3139]: WARNING:  Invalid HTTP request received.
+faro@BunweServer:~ $ sudo ss -tulpn | grep 8000
+tcp   LISTEN 0      2048                       0.0.0.0:8000       0.0.0.0:*    users:(("uvicorn",pid=3139,fd=13))
+faro@BunweServer:~ $ tailscale status
+100.75.19.64    bunweserver  alonsoalfaro5091@  linux    -
+100.107.249.67  node         alonsoalfaro5091@  android  idle, tx 1772 rx 5012
+100.67.189.20   pc-alonso    alonsoalfaro5091@  windows  -
+faro@BunweServer:~ $ curl http://localhost:8000/historial
+{"historial":[{"id":14,"name":"Alonso"}]}faro@BunweServer:~ $
