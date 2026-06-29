@@ -1354,9 +1354,8 @@
   <div class="rule-card"><span class="rule-num">05</span><strong>P1 es el desbloqueador.</strong> Si alguien está trabado, P1 tiene prioridad en ayudar. El líder entiende todos los bloques del equipo.</div>
 </div>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <!-- Modal: ¿quién sos? -->
 <div id="name-modal">
@@ -1371,8 +1370,11 @@
   </div>
 </div>
 
-<!-- Botón cambiar nombre -->
+<!-- Chip de usuario (esquina inferior derecha) -->
 <div id="user-chip" onclick="changeName()" title="Cambiar nombre"></div>
+
+<!-- Barra de estado de conexión -->
+<div id="status-bar"></div>
 
 <style>
   #name-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:2000; align-items:center; justify-content:center; backdrop-filter:blur(6px); }
@@ -1390,43 +1392,30 @@
   #user-chip:hover { border-color:#7c6af7; color:var(--text); }
   #user-chip.show { display:flex; }
   .chip-dot { width:8px; height:8px; border-radius:50%; background:#7c6af7; flex-shrink:0; }
-  /* Loading state for checkboxes */
+  .chip-dot.online { background:#4ade80; }
+  #status-bar { display:none; position:fixed; top:0; left:0; right:0; z-index:3000; font-family:'Space Mono',monospace; font-size:0.68rem; text-align:center; padding:0.4rem; }
+  #status-bar.error { display:block; background:#f97b6b; color:white; }
+  #status-bar.ok { display:block; background:rgba(74,222,128,0.15); color:#4ade80; border-bottom:1px solid rgba(74,222,128,0.2); }
   .chk.syncing { opacity:0.4; pointer-events:none; }
-  /* Firebase offline indicator */
-  #offline-bar { display:none; position:fixed; top:0; left:0; right:0; z-index:3000; background:#f97b6b; color:white; font-family:'Space Mono',monospace; font-size:0.68rem; text-align:center; padding:0.4rem; }
 </style>
-
-<div id="offline-bar">⚠ Sin conexión — los cambios no se guardarán hasta reconectar</div>
 
 <script>
 // ─────────────────────────────────────────────
-// CONFIGURACIÓN FIREBASE
-// P1: reemplazá estos valores con los de tu
-// proyecto en console.firebase.google.com
+// PASO 1 — Pegá acá los datos de tu proyecto
+// Supabase → Settings → API
 // ─────────────────────────────────────────────
-const firebaseConfig = {
-  apiKey:            "PEGAR-API-KEY-AQUI",
-  authDomain:        "PEGAR-PROJECT.firebaseapp.com",
-  databaseURL:       "https://PEGAR-PROJECT-default-rtdb.firebaseio.com",
-  projectId:         "PEGAR-PROJECT",
-  storageBucket:     "PEGAR-PROJECT.appspot.com",
-  messagingSenderId: "PEGAR-SENDER-ID",
-  appId:             "PEGAR-APP-ID"
-};
+const SUPABASE_URL = 'https://PEGAR-PROJECT-ID.supabase.co';
+const SUPABASE_KEY = 'PEGAR-ANON-PUBLIC-KEY';
 
 // ─────────────────────────────────────────────
-// INICIALIZAR FIREBASE
+// INICIALIZAR SUPABASE
 // ─────────────────────────────────────────────
-let db;
+const { createClient } = supabase;
+let sb;
 try {
-  firebase.initializeApp(firebaseConfig);
-  db = firebase.database();
-  // Detectar offline/online
-  firebase.database().ref('.info/connected').on('value', function(snap) {
-    document.getElementById('offline-bar').style.display = snap.val() ? 'none' : 'block';
-  });
+  sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 } catch(e) {
-  console.warn('Firebase no configurado aún — modo local activo');
+  console.warn('Supabase no configurado — modo local activo');
 }
 
 // ─────────────────────────────────────────────
@@ -1456,37 +1445,44 @@ function changeName() {
 function updateChip() {
   var chip = document.getElementById('user-chip');
   if (myName) {
-    chip.innerHTML = '<div class="chip-dot"></div>' + myName + ' <span style="color:#6b6b85;margin-left:0.2rem;">· cambiar</span>';
+    chip.innerHTML = '<div class="chip-dot' + (sb ? ' online' : '') + '"></div>' +
+      myName + ' <span style="color:#6b6b85;margin-left:0.2rem;">· cambiar</span>';
     chip.classList.add('show');
   }
 }
 
+function setStatus(type, msg) {
+  var bar = document.getElementById('status-bar');
+  bar.className = type;
+  bar.textContent = msg;
+  if (type === 'ok') setTimeout(function(){ bar.className = ''; }, 2500);
+}
+
 // ─────────────────────────────────────────────
-// CHECKBOXES
+// APLICAR ESTADO A UN CHECKBOX
 // ─────────────────────────────────────────────
-function applyCheckState(el, data) {
-  // Eliminar label anterior
+function applyCheckState(el, row) {
   var old = el.parentElement.querySelector('.chk-who');
   if (old) old.remove();
 
-  if (data && data.done) {
+  if (row && row.done) {
     el.classList.remove('chk-todo');
     el.classList.add('chk-done');
     el.textContent = '✓';
     el.nextElementSibling.style.color = 'var(--text)';
     var label = document.createElement('span');
     label.className = 'chk-who';
-    label.textContent = '✓ ' + data.by + ' · ' + data.at;
+    label.textContent = '✓ ' + row.by_name + ' · ' + row.at;
     el.parentElement.appendChild(label);
   } else {
     el.classList.remove('chk-done');
     el.classList.add('chk-todo');
     el.textContent = '';
     el.nextElementSibling.style.color = '#9090a8';
-    if (data && data.by) {
+    if (row && row.by_name) {
       var label = document.createElement('span');
       label.className = 'chk-who chk-who-off';
-      label.textContent = '↩ ' + data.by + ' · ' + data.at;
+      label.textContent = '↩ ' + row.by_name + ' · ' + row.at;
       el.parentElement.appendChild(label);
     }
   }
@@ -1508,39 +1504,66 @@ function showGuide(person, id) {
   event.target.classList.add('active');
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+// ─────────────────────────────────────────────
+// INICIALIZAR CHECKBOXES
+// ─────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async function() {
   if (!myName) showNameModal();
   updateChip();
 
   var checks = document.querySelectorAll('.chk');
 
-  if (db) {
-    // ── MODO FIREBASE: escuchar en tiempo real ──
-    db.ref('checks').on('value', function(snapshot) {
-      var data = snapshot.val() || {};
-      checks.forEach(function(el, i) {
-        applyCheckState(el, data['c' + i]);
-      });
-    });
+  if (sb && SUPABASE_URL !== 'https://PEGAR-PROJECT-ID.supabase.co') {
+    // ── MODO SUPABASE ──────────────────────────
 
+    // 1. Cargar estado actual de todos los checks
+    var result = await sb.from('checks').select('*');
+    if (result.error) {
+      setStatus('error', '⚠ No se pudo conectar a Supabase — revisá las credenciales');
+    } else {
+      var map = {};
+      (result.data || []).forEach(function(row){ map[row.id] = row; });
+      checks.forEach(function(el, i){ applyCheckState(el, map['c' + i]); });
+      setStatus('ok', '✓ Conectado · cambios en tiempo real activos');
+      updateChip();
+    }
+
+    // 2. Suscripción en tiempo real
+    sb.channel('checks-sync')
+      .on('postgres_changes', {
+        event:  '*',
+        schema: 'public',
+        table:  'checks'
+      }, function(payload) {
+        var row = payload.new && payload.new.id ? payload.new : payload.old;
+        if (!row || !row.id) return;
+        var idx = parseInt(row.id.replace('c', ''));
+        if (!isNaN(idx) && checks[idx]) {
+          applyCheckState(checks[idx], payload.eventType === 'DELETE' ? null : payload.new);
+        }
+      })
+      .subscribe();
+
+    // 3. Click → upsert en Supabase
     checks.forEach(function(el, i) {
-      el.addEventListener('click', function() {
+      el.addEventListener('click', async function() {
         if (!myName) { showNameModal(); return; }
         var isDone = el.classList.contains('chk-done');
         el.classList.add('syncing');
-        db.ref('checks/c' + i).set({
-          done:   !isDone,
-          by:     myName,
-          action: isDone ? 'desmarcó' : 'marcó',
-          at:     fmtDate()
-        }).then(function() {
-          el.classList.remove('syncing');
-        });
+        var res = await sb.from('checks').upsert({
+          id:      'c' + i,
+          done:    !isDone,
+          by_name: myName,
+          action:  isDone ? 'desmarcó' : 'marcó',
+          at:      fmtDate()
+        }, { onConflict: 'id' });
+        el.classList.remove('syncing');
+        if (res.error) setStatus('error', '⚠ Error al guardar — ' + res.error.message);
       });
     });
 
   } else {
-    // ── MODO LOCAL: fallback sin Firebase ──
+    // ── MODO LOCAL (fallback sin Supabase) ─────
     checks.forEach(function(el, i) {
       var saved = localStorage.getItem('chk_' + i);
       if (saved) applyCheckState(el, JSON.parse(saved));
@@ -1548,11 +1571,16 @@ document.addEventListener('DOMContentLoaded', function() {
       el.addEventListener('click', function() {
         if (!myName) { showNameModal(); return; }
         var isDone = el.classList.contains('chk-done');
-        var state = { done: !isDone, by: myName, action: isDone ? 'desmarcó' : 'marcó', at: fmtDate() };
+        var state = {
+          done: !isDone, by_name: myName,
+          action: isDone ? 'desmarcó' : 'marcó', at: fmtDate()
+        };
         localStorage.setItem('chk_' + i, JSON.stringify(state));
         applyCheckState(el, state);
       });
     });
+    setStatus('error', '⚠ Modo local — configurá Supabase para sincronizar con el equipo');
+    setTimeout(function(){ document.getElementById('status-bar').className=''; }, 4000);
   }
 });
 </script>
