@@ -1601,7 +1601,15 @@ document.addEventListener('DOMContentLoaded', async function() {
       el.addEventListener('click', async function() {
         if (!myName) { showNameModal(); return; }
         var isDone = el.classList.contains('chk-done');
-        el.classList.add('syncing');
+        // Aplicar cambio visual inmediato sin esperar Supabase
+        var optimistic = {
+          done: !isDone,
+          by_name: myName,
+          action: isDone ? 'desmarcó' : 'marcó',
+          at: fmtDate()
+        };
+        applyCheckState(el, optimistic);
+        // Guardar en Supabase en segundo plano
         var res = await sb.from('checks').upsert({
           id:      'c' + i,
           done:    !isDone,
@@ -1609,8 +1617,11 @@ document.addEventListener('DOMContentLoaded', async function() {
           action:  isDone ? 'desmarcó' : 'marcó',
           at:      fmtDate()
         }, { onConflict: 'id' });
-        el.classList.remove('syncing');
-        if (res.error) setStatus('error', '⚠ Error al guardar — ' + res.error.message);
+        if (res.error) {
+          // Si falla, revertir el cambio visual
+          applyCheckState(el, { done: isDone, by_name: myName, at: fmtDate() });
+          setStatus('error', '⚠ Error al guardar — ' + res.error.message);
+        }
       });
     });
 
