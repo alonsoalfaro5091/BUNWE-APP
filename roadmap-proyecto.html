@@ -1354,7 +1354,51 @@
   <div class="rule-card"><span class="rule-num">05</span><strong>P1 es el desbloqueador.</strong> Si alguien está trabado, P1 tiene prioridad en ayudar. El líder entiende todos los bloques del equipo.</div>
 </div>
 
-<!-- Supabase SDK -->
+<!-- Pantalla de contraseña -->
+<div id="lock-screen">
+  <div class="lock-box">
+    <div class="lock-icon">🔒</div>
+    <div class="lock-title">Bunwe — Acceso del equipo</div>
+    <div class="lock-sub">Ingresá la clave del equipo para continuar</div>
+    <input id="lock-input" type="password" placeholder="Contraseña" class="modal-input"
+      onkeydown="if(event.key==='Enter') checkPassword()">
+    <button onclick="checkPassword()" class="modal-btn">Entrar →</button>
+    <div id="lock-error" class="lock-error"></div>
+  </div>
+</div>
+
+<style>
+  #lock-screen { display:flex; position:fixed; inset:0; background:#0a0a0f; z-index:9999; align-items:center; justify-content:center; }
+  .lock-box { background:#16161f; border:1px solid #252535; border-radius:18px; padding:2rem 1.75rem; max-width:360px; width:90%; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+  .lock-icon { font-size:2rem; margin-bottom:0.5rem; }
+  .lock-title { font-weight:800; font-size:1.1rem; margin-bottom:0.35rem; }
+  .lock-sub { font-size:0.75rem; color:#6b6b85; margin-bottom:1.25rem; font-family:'Space Mono',monospace; line-height:1.5; }
+  .lock-error { font-family:'Space Mono',monospace; font-size:0.7rem; color:#f97b6b; margin-top:0.75rem; min-height:1rem; }
+  #lock-screen.hidden { display:none; }
+</style>
+
+<script>
+  const TEAM_PASSWORD = 'bunwe-evalo-faro-roa-sepu-4G';
+
+  function checkPassword() {
+    var input = document.getElementById('lock-input').value;
+    if (input === TEAM_PASSWORD) {
+      localStorage.setItem('bunwe_auth', 'ok');
+      document.getElementById('lock-screen').classList.add('hidden');
+    } else {
+      var err = document.getElementById('lock-error');
+      err.textContent = '⚠ Contraseña incorrecta';
+      document.getElementById('lock-input').value = '';
+      document.getElementById('lock-input').focus();
+      setTimeout(function(){ err.textContent = ''; }, 2000);
+    }
+  }
+
+  // Si ya entró antes, no mostrar la pantalla
+  if (localStorage.getItem('bunwe_auth') === 'ok') {
+    document.getElementById('lock-screen').classList.add('hidden');
+  }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <!-- Modal: ¿quién sos? -->
@@ -1513,7 +1557,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   var checks = document.querySelectorAll('.chk');
 
-  if (sb && SUPABASE_URL !== 'https://zgcvbbazsgjcbuzcbhra.supabase.co') {
+  if (sb && SUPABASE_URL !== 'https://PEGAR-PROJECT-ID.supabase.co') {
     // ── MODO SUPABASE ──────────────────────────
 
     // 1. Cargar estado actual de todos los checks
