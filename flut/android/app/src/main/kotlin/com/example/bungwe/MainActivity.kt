@@ -1,4 +1,4 @@
-package com.example.flut
+package com.example.bungwe
 
 import io.flutter.embedding.android.FlutterActivity
 
