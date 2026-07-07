@@ -96,4 +96,3 @@ def verificar_password(password, guardado):
         return secrets.compare_digest(h.hex(), hash_hex)
     except (ValueError, AttributeError):
         return False
-1

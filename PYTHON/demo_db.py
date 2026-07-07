@@ -16,4 +16,3 @@ print("horas calculadas:", horas)
 
 print("\n== Historial (JSON del contrato) ==")
 print(json.dumps(db.get_historial(uid), ensure_ascii=False, indent=2))
-5
