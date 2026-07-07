@@ -11,7 +11,7 @@ void main() {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
     ),
-  );
+  );`
   runApp(const BungweApp());
 }
 
