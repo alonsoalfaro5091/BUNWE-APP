@@ -20,6 +20,10 @@
   .nav-logo-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.82rem; color: var(--accent1); letter-spacing: -0.02em; }
   .nav-pill { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; padding: 0.3rem 0.7rem; border-radius: 99px; border: 1px solid var(--border); color: var(--muted); cursor: pointer; transition: all 0.15s; text-decoration: none; white-space: nowrap; }
   .nav-pill:hover { color: var(--text); border-color: var(--accent1); background: rgba(124,106,247,0.1); }
+  .gather-pill { display:flex; align-items:center; gap:0.35rem; border-color: rgba(110,231,183,0.5)!important; color:#6ee7b7!important; background: rgba(110,231,183,0.08); font-weight:700; margin-right:0.3rem; position:relative; }
+  .gather-pill::before { content:''; width:6px; height:6px; border-radius:50%; background:#6ee7b7; box-shadow:0 0 0 rgba(110,231,183,0.6); animation: gatherPulse 2s infinite; }
+  .gather-pill:hover { background: rgba(110,231,183,0.18)!important; }
+  @keyframes gatherPulse { 0%{box-shadow:0 0 0 0 rgba(110,231,183,0.55);} 70%{box-shadow:0 0 0 6px rgba(110,231,183,0);} 100%{box-shadow:0 0 0 0 rgba(110,231,183,0);} }
   .np1:hover { border-color: var(--accent1)!important; color: var(--accent1)!important; background: rgba(124,106,247,0.1)!important; }
   .np2:hover { border-color: var(--accent2)!important; color: var(--accent2)!important; background: rgba(62,207,178,0.1)!important; }
   .np3:hover { border-color: var(--accent3)!important; color: var(--accent3)!important; background: rgba(249,123,107,0.1)!important; }
@@ -240,14 +244,18 @@
     <img src="bunweicon.png" alt="Bunwe" class="nav-logo-img">
     <span class="nav-logo-text">Bunwe</span>
   </div>
+  <a class="nav-pill gather-pill" href="https://app.v2.gather.town/app/26524532-9af5-4fae-94cf-67caf46915f1" target="_blank" rel="noopener">🎮 Entrar a Gather</a>
   <a class="nav-pill" href="#estado">Estado</a>
   <a class="nav-pill" href="#hitos">Hitos</a>
+  <a class="nav-pill" href="#gantt">📅 Gantt</a>
+  <a class="nav-pill npw" href="#reloj">⌚ Reloj</a>
   <a class="nav-pill" href="#json">JSON</a>
   <a class="nav-pill" href="#git">Git</a>
   <a class="nav-pill np1" href="#bloque-p1">🛠 P1 — Infra</a>
   <a class="nav-pill np2" href="#bloque-p2">🗄 P2 — BD</a>
   <a class="nav-pill np3" href="#bloque-p3">🎨 P3 — UI</a>
   <a class="nav-pill np4" href="#bloque-p4">🔌 P4 — Lógica</a>
+  <a class="nav-pill np5" href="#bloque-p5">📡 P5 — IoT</a>
   <a class="nav-pill" href="#remoto">Acceso Remoto</a>
   <a class="nav-pill" href="#contrato">JSON</a>
   <a class="nav-pill" href="#repo">Repo</a>
@@ -1160,6 +1168,49 @@
   </div>
 </div>
 
+<div class="person-block pb5" id="bloque-p5">
+  <div class="pb-header">
+    <div class="pb-avatar">📡</div>
+    <div class="pb-meta">
+      <div class="pb-name">Persona 5 — Hardware & Comunicaciones (IoT)</div>
+      <div class="pb-role">Nueva integrante · telecomunicaciones · dueña del wearable de sueño</div>
+      <div class="collab-row">
+        <span class="collab-label">Colabora con:</span>
+        <span class="collab-badge cb1">P1</span><span class="collab-badge cb2">P2</span>
+        <span class="collab-label">— comparte electrónica y firmware del reloj con P1 · lidera BLE</span>
+      </div>
+    </div>
+    <div class="pb-tags">
+      <span class="tag tag-pink">BLE</span><span class="tag tag-pink">ESP32</span><span class="tag tag-pink">Sensores</span>
+      <span class="tag tag-pink">Redes</span><span class="tag tag-green">Nueva 🆕</span>
+    </div>
+  </div>
+  <div class="pb-body">
+    <div>
+      <div class="pb-col-title">✅ Progreso actual</div>
+      <ul class="checklist">
+        <li><span class="chk chk-todo"></span><span>Onboarding: recorrer la arquitectura Pi/FastAPI/MariaDB</span></li>
+        <li><span class="chk chk-todo"></span><span>Reporte de viabilidad: ESP32+sensor vs. banda BLE comercial</span></li>
+        <li><span class="chk chk-todo"></span><span>Stack BLE y protocolo de sincronización definidos</span></li>
+        <li><span class="chk chk-todo"></span><span>Prototipo armado — primeras lecturas del sensor</span></li>
+        <li><span class="chk chk-todo"></span><span>Primer envío de datos BLE reloj → teléfono</span></li>
+        <li><span class="chk chk-todo"></span><span>Calibración y precisión del sensor</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="pb-col-title">🔗 Recursos recomendados</div>
+      <div class="doc-list">
+        <a class="doc-link" href="https://pub.dev/packages/flutter_blue_plus" target="_blank"><div class="doc-icon">📶</div><div class="doc-info"><div class="doc-title">flutter_blue_plus (pub.dev)</div><div class="doc-desc">Paquete BLE para Flutter — conexión con el reloj</div></div></a>
+        <a class="doc-link" href="https://randomnerdtutorials.com/esp32-mpu-6050-accelerometer-gyroscope-arduino/" target="_blank"><div class="doc-icon">🔧</div><div class="doc-info"><div class="doc-title">ESP32 + MPU6050 (tutorial)</div><div class="doc-desc">Actigrafía: detectar movimiento durante el sueño</div></div></a>
+        <a class="doc-link" href="https://tailscale.com/kb" target="_blank"><div class="doc-icon">🌐</div><div class="doc-info"><div class="doc-title">Tailscale docs</div><div class="doc-desc">Para apoyar a P1 en diagnóstico de red</div></div></a>
+      </div>
+      <div class="note-list" style="margin-top:0.8rem;">
+        <div class="note-item"><strong>Ideas extra:</strong> documentar calidad del enlace (alcance/latencia/consumo), diseñar resiliencia de reconexión, armar el diagrama de capas de comunicación para la demo.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div><!-- fin .blocks -->
 
 <div class="section-title" id="contrato">Contrato JSON — estructura acordada entre P4 y P3</div>
@@ -1361,6 +1412,539 @@
   <div class="rule-card"><span class="rule-num">04</span><strong>Un bug no para el proyecto.</strong> Si algo falla, devolvé JSON fijo sin tocar la BD ese día. Seguir avanzando siempre.</div>
   <div class="rule-card"><span class="rule-num">05</span><strong>P1 es el desbloqueador.</strong> Si alguien está trabado, P1 tiene prioridad en ayudar. El líder entiende todos los bloques del equipo.</div>
 </div>
+
+<style>
+  :root { --accent5: #ff6b9d; }
+  .np5:hover { border-color: var(--accent5)!important; color: var(--accent5)!important; background: rgba(255,107,157,0.1)!important; }
+  .npw:hover { border-color: #6ee7b7!important; color: #6ee7b7!important; background: rgba(110,231,183,0.1)!important; }
+  .tag-pink{color:var(--accent5);border-color:rgba(255,107,157,0.4);background:rgba(255,107,157,0.08);}
+  .cb5{background:rgba(255,107,157,0.15);color:var(--accent5);}
+  .pb5 { border: 1px solid rgba(255,107,157,0.35); }
+  .pb5 .pb-header { background: rgba(255,107,157,0.07); }
+  .pb5 .pb-avatar { background: rgba(255,107,157,0.2); }
+  .pb5 .pb-name { color: var(--accent5); }
+
+  /* ══ GANTT EDITABLE ══ */
+  .gantt-toolbar { display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.9rem; }
+  .gantt-btn { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.06em; padding:0.42rem 0.9rem; border-radius:8px; border:1px solid rgba(124,106,247,0.45); background:rgba(124,106,247,0.12); color:var(--accent1); cursor:pointer; transition:all .15s; }
+  .gantt-btn:hover { background:rgba(124,106,247,0.22); }
+  .gantt-sync { font-family:'Space Mono',monospace; font-size:0.6rem; color:var(--muted); }
+  .gantt-legend { display:flex; gap:0.9rem; flex-wrap:wrap; margin-bottom:1rem; }
+  .gantt-legend-item { display:flex; align-items:center; gap:0.35rem; font-family:'Space Mono',monospace; font-size:0.6rem; color:var(--muted); }
+  .gantt-legend-dot { width:10px; height:10px; border-radius:3px; flex-shrink:0; }
+  .gantt-wrap { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:1.25rem; overflow-x:auto; }
+  .gantt-hint { font-family:'Space Mono',monospace; font-size:0.63rem; color:var(--muted); margin-bottom:1rem; }
+  .gantt-inner { min-width:760px; }
+  .gantt-ruler { display:grid; grid-template-columns:230px 1fr; margin-bottom:0.6rem; }
+  .gantt-ruler-track { position:relative; height:18px; border-bottom:1px solid var(--border); }
+  .gantt-ruler-tick { position:absolute; top:0; font-family:'Space Mono',monospace; font-size:0.56rem; color:var(--muted); border-left:1px solid var(--border); padding-left:0.3rem; height:100%; white-space:nowrap; }
+  .gantt-today { position:absolute; top:0; bottom:0; width:2px; background:var(--red); opacity:0.6; z-index:3; }
+  .gantt-phase-label { font-family:'Space Mono',monospace; font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase; margin:1.05rem 0 0.45rem; display:flex; align-items:center; gap:0.45rem; color:var(--text); }
+  .gantt-phase-dot { width:9px; height:9px; border-radius:3px; }
+  .gantt-row { display:grid; grid-template-columns:230px 1fr; align-items:center; gap:0.5rem; margin-bottom:0.3rem; }
+  .gantt-row-label { font-size:0.69rem; color:#c0c0dc; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding-right:0.4rem; display:flex; align-items:center; gap:0.35rem; cursor:pointer; }
+  .gantt-row-label:hover { color:var(--text); }
+  .gantt-track { position:relative; height:27px; background:rgba(255,255,255,0.02); border-radius:7px; }
+  .gantt-bar { position:absolute; top:3px; bottom:3px; border-radius:6px; display:flex; align-items:center; gap:0.28rem; padding:0 0.45rem; font-size:0.56rem; font-family:'Space Mono',monospace; white-space:nowrap; overflow:hidden; cursor:pointer; transition:filter .12s, transform .12s; color:#0a0a0f; font-weight:700; border:none; }
+  .gantt-bar:hover { filter:brightness(1.13); transform:scaleY(1.12); z-index:5; }
+  .gantt-bar.est-done { opacity:0.45; text-decoration:line-through; }
+  .gantt-bar.est-curso { box-shadow:0 0 0 2px rgba(255,255,255,0.35); }
+  .bar-Descubrimiento{ background:var(--accent4); }
+  .bar-Planificacion{ background:var(--accent3); }
+  .bar-Ejecucion{ background:var(--accent1); color:#fff; }
+  .bar-Revision{ background:var(--accent2); }
+  .bar-Entrega{ background:var(--green); }
+  .pdot { width:7px; height:7px; border-radius:50%; flex-shrink:0; border:1px solid rgba(0,0,0,0.3); }
+  .pdot-P1{background:var(--accent1);} .pdot-P2{background:var(--accent2);} .pdot-P3{background:var(--accent3);}
+  .pdot-P4{background:var(--accent4);} .pdot-P5{background:var(--accent5);} .pdot-EQ{background:#ffffff;}
+  .task-detail { grid-column:1 / -1; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:10px; padding:0.9rem 1rem; margin:0.15rem 0 0.7rem; font-size:0.76rem; }
+  .td-head { display:flex; align-items:center; justify-content:space-between; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.55rem; }
+  .td-title { font-weight:800; font-size:0.86rem; }
+  .td-badges { display:flex; gap:0.35rem; flex-wrap:wrap; align-items:center; }
+  .td-est { font-family:'Space Mono',monospace; font-size:0.58rem; padding:0.18rem 0.55rem; border-radius:99px; border:1px solid; }
+  .est-b-no{color:var(--muted);border-color:var(--border);} .est-b-curso{color:var(--accent4);border-color:rgba(247,201,72,0.5);background:rgba(247,201,72,0.08);} .est-b-done{color:var(--green);border-color:rgba(74,222,128,0.5);background:rgba(74,222,128,0.08);}
+  .td-dates { font-family:'Space Mono',monospace; font-size:0.62rem; color:var(--muted); }
+  .td-desc { color:#b8b8d0; line-height:1.55; margin-bottom:0.55rem; }
+  .td-rec { font-size:0.72rem; color:#9090a8; margin-bottom:0.6rem; }
+  .td-rec strong { color:var(--text); }
+  .td-actions { display:flex; gap:0.45rem; margin-top:0.7rem; }
+  .td-btn { font-family:'Space Mono',monospace; font-size:0.6rem; padding:0.32rem 0.75rem; border-radius:7px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; transition:all .15s; }
+  .td-btn:hover { color:var(--text); border-color:var(--accent1); }
+  .td-btn.danger:hover { color:var(--red); border-color:var(--red); }
+  .td-chk { list-style:none; display:flex; flex-direction:column; gap:0.42rem; margin-top:0.35rem; }
+  .td-chk li { display:flex; align-items:center; gap:0.6rem; font-size:0.76rem; color:#c0c0dc; }
+  /* Modal edición */
+  #gm-overlay { display:none; position:fixed; inset:0; background:rgba(10,10,15,0.85); z-index:9000; align-items:flex-start; justify-content:center; overflow-y:auto; padding:3rem 1rem; backdrop-filter:blur(6px); }
+  #gm-overlay.open { display:flex; }
+  .gm-box { background:#16161f; border:1px solid #2c2c40; border-radius:18px; padding:1.5rem 1.5rem 1.3rem; max-width:560px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+  .gm-title { font-weight:800; font-size:1rem; margin-bottom:1rem; }
+  .gm-field { margin-bottom:0.85rem; }
+  .gm-label { font-family:'Space Mono',monospace; font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:0.35rem; display:block; }
+  .gm-input, .gm-select, .gm-textarea { width:100%; background:rgba(0,0,0,0.35); border:1px solid var(--border); border-radius:9px; color:var(--text); font-family:'Syne',sans-serif; font-size:0.82rem; padding:0.55rem 0.7rem; outline:none; }
+  .gm-input:focus, .gm-select:focus, .gm-textarea:focus { border-color:var(--accent1); }
+  .gm-textarea { min-height:64px; resize:vertical; font-size:0.78rem; line-height:1.5; }
+  .gm-row2 { display:grid; grid-template-columns:1fr 1fr; gap:0.7rem; }
+  .gm-people { display:flex; gap:0.4rem; flex-wrap:wrap; }
+  .gm-pchip { font-family:'Space Mono',monospace; font-size:0.62rem; padding:0.3rem 0.7rem; border-radius:99px; border:1px solid var(--border); color:var(--muted); cursor:pointer; user-select:none; transition:all .12s; }
+  .gm-pchip.on { color:#0a0a0f; font-weight:700; }
+  .gm-pchip.on.pc-P1{background:var(--accent1);color:#fff;border-color:var(--accent1);} .gm-pchip.on.pc-P2{background:var(--accent2);border-color:var(--accent2);}
+  .gm-pchip.on.pc-P3{background:var(--accent3);border-color:var(--accent3);} .gm-pchip.on.pc-P4{background:var(--accent4);border-color:var(--accent4);}
+  .gm-pchip.on.pc-P5{background:var(--accent5);border-color:var(--accent5);} .gm-pchip.on.pc-EQ{background:#fff;border-color:#fff;}
+  .gm-actions { display:flex; gap:0.55rem; justify-content:flex-end; margin-top:1.1rem; }
+  .gm-save { font-family:'Space Mono',monospace; font-size:0.68rem; padding:0.5rem 1.2rem; border-radius:9px; border:none; background:var(--accent1); color:#fff; font-weight:700; cursor:pointer; }
+  .gm-cancel { font-family:'Space Mono',monospace; font-size:0.68rem; padding:0.5rem 1rem; border-radius:9px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; }
+
+  /* ══ SECCIÓN RELOJ ══ */
+  .watch-hero { background:linear-gradient(135deg, rgba(110,231,183,0.08), rgba(124,106,247,0.08)); border:1px solid rgba(110,231,183,0.3); border-radius:18px; padding:1.4rem 1.5rem; margin-bottom:1.5rem; }
+  .watch-hero-title { font-weight:800; font-size:1.15rem; letter-spacing:-0.02em; margin-bottom:0.4rem; }
+  .watch-hero-title span { color:#6ee7b7; }
+  .watch-hero-sub { font-size:0.8rem; color:#b8b8d0; line-height:1.6; }
+  .watch-owners { display:flex; gap:0.4rem; align-items:center; margin-top:0.7rem; flex-wrap:wrap; }
+  .watch-sub { font-family:'Space Mono',monospace; font-size:0.63rem; letter-spacing:0.14em; text-transform:uppercase; color:#6ee7b7; margin:1.6rem 0 0.8rem; display:flex; align-items:center; gap:0.6rem; }
+  .watch-sub::after { content:''; flex:1; height:1px; background:rgba(110,231,183,0.2); }
+  .comp-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); gap:0.7rem; }
+  .comp-card { background:var(--card); border:1px solid var(--border); border-radius:13px; padding:0.95rem 1rem; }
+  .comp-head { display:flex; align-items:center; gap:0.6rem; margin-bottom:0.45rem; }
+  .comp-icon { font-size:1.25rem; }
+  .comp-name { font-weight:700; font-size:0.82rem; }
+  .comp-price { font-family:'Space Mono',monospace; font-size:0.6rem; color:#6ee7b7; margin-left:auto; white-space:nowrap; }
+  .comp-desc { font-size:0.73rem; color:#a0a0bc; line-height:1.5; }
+  .comp-where { font-family:'Space Mono',monospace; font-size:0.58rem; color:var(--muted); margin-top:0.45rem; }
+  .comp-alt { border-style:dashed; opacity:0.85; }
+  .wtool-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(210px, 1fr)); gap:0.6rem; }
+  .wtool { background:var(--card); border:1px solid var(--border); border-radius:11px; padding:0.75rem 0.9rem; display:flex; gap:0.65rem; align-items:flex-start; }
+  .wtool-icon { font-size:1.05rem; flex-shrink:0; }
+  .wtool-name { font-weight:700; font-size:0.76rem; }
+  .wtool-desc { font-size:0.68rem; color:#9090a8; line-height:1.45; margin-top:0.15rem; }
+  .wres-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:0.65rem; }
+  .watch-miles { display:flex; flex-direction:column; gap:0.55rem; }
+  .wmile { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:0.85rem 1rem; display:flex; gap:0.85rem; align-items:flex-start; }
+  .wmile-num { font-family:'Space Mono',monospace; font-size:0.68rem; font-weight:700; color:#6ee7b7; background:rgba(110,231,183,0.1); border:1px solid rgba(110,231,183,0.3); border-radius:8px; padding:0.3rem 0.55rem; flex-shrink:0; }
+  .wmile-body { flex:1; }
+  .wmile-title { font-weight:700; font-size:0.82rem; }
+  .wmile-desc { font-size:0.73rem; color:#a0a0bc; line-height:1.5; margin-top:0.2rem; }
+  .wmile-meta { display:flex; gap:0.4rem; flex-wrap:wrap; margin-top:0.45rem; align-items:center; }
+  .wmile-date { font-family:'Space Mono',monospace; font-size:0.58rem; color:var(--muted); }
+  .watch-warn { background:rgba(247,201,72,0.06); border:1px solid rgba(247,201,72,0.3); border-radius:12px; padding:0.85rem 1rem; font-size:0.75rem; color:#d8c890; line-height:1.55; margin-top:1rem; }
+</style>
+
+<!-- ═══════════════ CARTA GANTT INTERACTIVA Y EDITABLE ═══════════════ -->
+<div class="section-title" id="gantt">Carta Gantt interactiva — Sprint competencia (19 jul → 1 sept)</div>
+
+<div class="gantt-toolbar">
+  <button class="gantt-btn" onclick="ganttNew()">➕ Nueva tarea</button>
+  <span class="gantt-sync" id="gantt-sync">· cargando…</span>
+</div>
+
+<div class="gantt-legend">
+  <div class="gantt-legend-item"><span class="gantt-legend-dot" style="background:var(--accent4)"></span>Descubrimiento</div>
+  <div class="gantt-legend-item"><span class="gantt-legend-dot" style="background:var(--accent3)"></span>Planificación</div>
+  <div class="gantt-legend-item"><span class="gantt-legend-dot" style="background:var(--accent1)"></span>Ejecución</div>
+  <div class="gantt-legend-item"><span class="gantt-legend-dot" style="background:var(--accent2)"></span>Revisión</div>
+  <div class="gantt-legend-item"><span class="gantt-legend-dot" style="background:var(--green)"></span>Entrega</div>
+  <div class="gantt-legend-item">·</div>
+  <div class="gantt-legend-item"><span class="pdot pdot-P1"></span>P1</div>
+  <div class="gantt-legend-item"><span class="pdot pdot-P2"></span>P2</div>
+  <div class="gantt-legend-item"><span class="pdot pdot-P3"></span>P3</div>
+  <div class="gantt-legend-item"><span class="pdot pdot-P4"></span>P4</div>
+  <div class="gantt-legend-item"><span class="pdot pdot-P5"></span>P5</div>
+  <div class="gantt-legend-item"><span class="pdot pdot-EQ"></span>Equipo</div>
+</div>
+
+<div class="gantt-wrap">
+  <div class="gantt-hint">👆 Tocá una barra o su nombre para ver detalle y checklist · ✏️ Editar cambia fechas, estado, asignados y recursos · los cambios se sincronizan con todo el equipo</div>
+  <div class="gantt-inner" id="gantt-app"></div>
+</div>
+
+<!-- Modal de edición -->
+<div id="gm-overlay">
+  <div class="gm-box">
+    <div class="gm-title" id="gm-modal-title">Editar tarea</div>
+    <div class="gm-field"><label class="gm-label">Título</label><input class="gm-input" id="gm-t"></div>
+    <div class="gm-row2">
+      <div class="gm-field"><label class="gm-label">Inicio</label><input class="gm-input" id="gm-s" type="date"></div>
+      <div class="gm-field"><label class="gm-label">Fin</label><input class="gm-input" id="gm-e" type="date"></div>
+    </div>
+    <div class="gm-row2">
+      <div class="gm-field"><label class="gm-label">Fase</label>
+        <select class="gm-select" id="gm-f">
+          <option>Descubrimiento</option><option>Planificacion</option><option>Ejecucion</option><option>Revision</option><option>Entrega</option>
+        </select>
+      </div>
+      <div class="gm-field"><label class="gm-label">Estado</label>
+        <select class="gm-select" id="gm-est">
+          <option>No iniciado</option><option>En curso</option><option>Completado</option>
+        </select>
+      </div>
+    </div>
+    <div class="gm-field"><label class="gm-label">Asignados (tocá para activar)</label>
+      <div class="gm-people" id="gm-p"></div>
+    </div>
+    <div class="gm-field"><label class="gm-label">Descripción / objetivo</label><textarea class="gm-textarea" id="gm-d"></textarea></div>
+    <div class="gm-field"><label class="gm-label">Recursos / conocimientos necesarios</label><textarea class="gm-textarea" id="gm-rec"></textarea></div>
+    <div class="gm-field"><label class="gm-label">Checklist (una línea por ítem)</label><textarea class="gm-textarea" id="gm-chk"></textarea></div>
+    <div class="gm-actions">
+      <button class="gm-cancel" onclick="gmClose()">Cancelar</button>
+      <button class="gm-save" onclick="gmSave()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SECCIÓN ESPECIAL: EL RELOJ BUNWE ═══════════════ -->
+<div class="section-title" id="reloj">⌚ El Reloj Bunwe — wearable de sueño</div>
+
+<div class="watch-hero">
+  <div class="watch-hero-title">Medir el sueño <span>sin que el usuario haga nada</span></div>
+  <div class="watch-hero-sub">
+    Un dispositivo de muñeca con acelerómetro que detecta movimiento durante la noche (actigrafía), calcula
+    cuándo dormiste y cuánto, y lo manda por Bluetooth a la app al despertar. Y sí — también da la hora ⏰.
+    Chao ingreso manual de datos.
+  </div>
+  <div class="watch-owners">
+    <span class="collab-label">Dueños del workstream:</span>
+    <span class="collab-badge cb5">P5 Valeria · comunicaciones BLE</span>
+    <span class="collab-badge cb1">P1 Alonso · electrónica + firmware</span>
+  </div>
+</div>
+
+<div class="watch-sub">🧩 Componentes — accesibles y fáciles de conseguir</div>
+<div class="comp-grid">
+  <div class="comp-card">
+    <div class="comp-head"><span class="comp-icon">🧠</span><span class="comp-name">ESP32 DevKit</span><span class="comp-price">~$4.000–8.000 CLP</span></div>
+    <div class="comp-desc">El cerebro: microcontrolador con Bluetooth y WiFi integrados. Se programa igual que un Arduino.</div>
+    <div class="comp-where">MercadoLibre · AliExpress · tiendas de electrónica</div>
+  </div>
+  <div class="comp-card">
+    <div class="comp-head"><span class="comp-icon">📐</span><span class="comp-name">MPU6050</span><span class="comp-price">~$2.000–4.000 CLP</span></div>
+    <div class="comp-desc">Acelerómetro + giroscopio. Detecta el movimiento de la muñeca — la base de la actigrafía.</div>
+    <div class="comp-where">MercadoLibre · AliExpress · viene en kits Arduino</div>
+  </div>
+  <div class="comp-card">
+    <div class="comp-head"><span class="comp-icon">🕐</span><span class="comp-name">Pantalla OLED SSD1306 0.96"</span><span class="comp-price">~$2.500–5.000 CLP</span></div>
+    <div class="comp-desc">Para que el reloj… dé la hora ⏰ (y muestre estado/batería). Se conecta por I2C, los mismos 2 pines que el MPU6050 — comparten bus.</div>
+    <div class="comp-where">MercadoLibre · AliExpress · kits Arduino</div>
+  </div>
+  <div class="comp-card">
+    <div class="comp-head"><span class="comp-icon">🔋</span><span class="comp-name">Batería LiPo 3.7V</span><span class="comp-price">~$3.000–6.000 CLP</span></div>
+    <div class="comp-desc">Pequeña (500–1000 mAh) alcanza para varias noches. Alternativa aún más fácil: powerbank chico para el prototipo.</div>
+    <div class="comp-where">MercadoLibre · tiendas de drones/RC</div>
+  </div>
+  <div class="comp-card">
+    <div class="comp-head"><span class="comp-icon">⚡</span><span class="comp-name">Módulo TP4056</span><span class="comp-price">~$1.000–2.000 CLP</span></div>
+    <div class="comp-desc">Cargador de la LiPo por USB, con protección. Se conecta entre la batería y el ESP32.</div>
+    <div class="comp-where">MercadoLibre · AliExpress</div>
+  </div>
+  <div class="comp-card">
+    <div class="comp-head"><span class="comp-icon">🔌</span><span class="comp-name">Protoboard + jumpers</span><span class="comp-price">~$3.000–5.000 CLP</span></div>
+    <div class="comp-desc">Para armar el circuito sin soldar en la fase de prototipo. Cables dupont hembra-hembra y macho-macho.</div>
+    <div class="comp-where">Cualquier kit de inicio Arduino los trae</div>
+  </div>
+  <div class="comp-card">
+    <div class="comp-head"><span class="comp-icon">⌚</span><span class="comp-name">Correa / velcro + cajita</span><span class="comp-price">~$1.000–3.000 CLP</span></div>
+    <div class="comp-desc">Correa de velcro ancha o muñequera deportiva + cajita plástica pequeña para sujetar el circuito a la muñeca.</div>
+    <div class="comp-where">Ferretería · bazar · impresión 3D si el liceo tiene</div>
+  </div>
+  <div class="comp-card comp-alt">
+    <div class="comp-head"><span class="comp-icon">🅱️</span><span class="comp-name">Plan B: banda BLE comercial</span><span class="comp-price">~$15.000–25.000 CLP</span></div>
+    <div class="comp-desc">Si el hardware propio se atrasa: una Mi Band o similar con protocolo BLE conocido, leyendo sus datos desde la app. Menos puntos de innovación, pero asegura la feature.</div>
+    <div class="comp-where">MercadoLibre · tiendas de retail</div>
+  </div>
+</div>
+
+<div class="watch-sub">🛠️ Herramientas de desarrollo</div>
+<div class="wtool-grid">
+  <div class="wtool"><span class="wtool-icon">💻</span><div><div class="wtool-name">Arduino IDE / PlatformIO</div><div class="wtool-desc">Para programar el ESP32. PlatformIO corre dentro de VS Code — encaja con el flujo actual del equipo.</div></div></div>
+  <div class="wtool"><span class="wtool-icon">📱</span><div><div class="wtool-name">nRF Connect (app móvil)</div><div class="wtool-desc">Escáner BLE gratuito: ve los servicios y datos que emite el ESP32 antes de tener la app lista. Herramienta clave para P5.</div></div></div>
+  <div class="wtool"><span class="wtool-icon">🖥️</span><div><div class="wtool-name">Monitor Serial</div><div class="wtool-desc">Consola del Arduino IDE para ver en vivo las lecturas del sensor mientras se calibra.</div></div></div>
+  <div class="wtool"><span class="wtool-icon">🔍</span><div><div class="wtool-name">Multímetro</div><div class="wtool-desc">Verificar voltajes y continuidad. Uno básico sirve (~$5.000 CLP), y el liceo probablemente tiene.</div></div></div>
+  <div class="wtool"><span class="wtool-icon">🔥</span><div><div class="wtool-name">Cautín (fase final)</div><div class="wtool-desc">Solo para la versión final compacta. En protoboard no se necesita. Pedirlo prestado al taller del liceo.</div></div></div>
+  <div class="wtool"><span class="wtool-icon">📶</span><div><div class="wtool-name">flutter_blue_plus</div><div class="wtool-desc">Paquete Flutter para hablar BLE desde la app — el puente entre el reloj y Bunwe.</div></div></div>
+</div>
+
+<div class="watch-sub">📚 Recursos — tutoriales, videos y documentación</div>
+<div class="wres-grid">
+  <a class="doc-link" href="https://randomnerdtutorials.com/esp32-mpu-6050-accelerometer-gyroscope-arduino/" target="_blank"><div class="doc-icon">📐</div><div class="doc-info"><div class="doc-title">ESP32 + MPU6050 — Random Nerd Tutorials</div><div class="doc-desc">Tutorial paso a paso: cablear y leer el acelerómetro</div></div></a>
+  <a class="doc-link" href="https://randomnerdtutorials.com/esp32-bluetooth-low-energy-ble-arduino-ide/" target="_blank"><div class="doc-icon">📡</div><div class="doc-info"><div class="doc-title">ESP32 BLE — Random Nerd Tutorials</div><div class="doc-desc">Cómo emitir datos por Bluetooth Low Energy desde el ESP32</div></div></a>
+  <a class="doc-link" href="https://lastminuteengineers.com/esp32-arduino-ide-tutorial/" target="_blank"><div class="doc-icon">🚀</div><div class="doc-info"><div class="doc-title">Primeros pasos ESP32 — Last Minute Engineers</div><div class="doc-desc">Configurar el entorno y subir el primer programa</div></div></a>
+  <a class="doc-link" href="https://pub.dev/packages/flutter_blue_plus" target="_blank"><div class="doc-icon">💙</div><div class="doc-info"><div class="doc-title">flutter_blue_plus — pub.dev</div><div class="doc-desc">Docs del paquete BLE para Flutter con ejemplos</div></div></a>
+  <a class="doc-link" href="https://docs.espressif.com/projects/arduino-esp32/en/latest/" target="_blank"><div class="doc-icon">📖</div><div class="doc-info"><div class="doc-title">Docs oficiales Arduino-ESP32</div><div class="doc-desc">Referencia completa de Espressif para el ESP32</div></div></a>
+  <a class="doc-link" href="https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp" target="_blank"><div class="doc-icon">📱</div><div class="doc-info"><div class="doc-title">nRF Connect for Mobile — Play Store</div><div class="doc-desc">Escáner BLE para depurar el reloj desde el teléfono</div></div></a>
+  <a class="doc-link" href="https://www.youtube.com/results?search_query=esp32+mpu6050+tutorial+espa%C3%B1ol" target="_blank"><div class="doc-icon">▶️</div><div class="doc-info"><div class="doc-title">YouTube: ESP32 + MPU6050 en español</div><div class="doc-desc">Búsqueda con videos paso a paso en español</div></div></a>
+  <a class="doc-link" href="https://www.youtube.com/results?search_query=esp32+ble+flutter" target="_blank"><div class="doc-icon">▶️</div><div class="doc-info"><div class="doc-title">YouTube: ESP32 BLE + Flutter</div><div class="doc-desc">Videos conectando ESP32 con apps Flutter por BLE</div></div></a>
+</div>
+
+<div class="watch-sub">🎯 Hitos del reloj — de la protoboard a la muñeca</div>
+<div class="watch-miles">
+  <div class="wmile"><span class="wmile-num">R1</span><div class="wmile-body">
+    <div class="wmile-title">Decisión de camino: hardware propio vs. banda comercial</div>
+    <div class="wmile-desc">Cotizar componentes, verificar tiempos de envío y comparar contra el plazo del 1 sept. Si los componentes no llegan antes del 29 jul, activar el plan B.</div>
+    <div class="wmile-meta"><span class="collab-badge cb5">P5</span><span class="collab-badge cb1">P1</span><span class="wmile-date">21–22 jul</span></div>
+  </div></div>
+  <div class="wmile"><span class="wmile-num">R2</span><div class="wmile-body">
+    <div class="wmile-title">Circuito en protoboard + primeras lecturas</div>
+    <div class="wmile-desc">ESP32 + MPU6050 cableados, programa básico leyendo aceleración en el Monitor Serial. Distinguir "quieto" de "en movimiento".</div>
+    <div class="wmile-meta"><span class="collab-badge cb1">P1</span><span class="collab-badge cb5">P5</span><span class="wmile-date">29 jul – 4 ago</span></div>
+  </div></div>
+  <div class="wmile"><span class="wmile-num">R3</span><div class="wmile-body">
+    <div class="wmile-title">ESP32 emitiendo por BLE — visible en nRF Connect</div>
+    <div class="wmile-desc">El reloj publica un servicio BLE con los datos del sensor. Verificable con el teléfono antes de tocar Flutter.</div>
+    <div class="wmile-meta"><span class="collab-badge cb5">P5</span><span class="wmile-date">5–8 ago</span></div>
+  </div></div>
+  <div class="wmile"><span class="wmile-num">R4</span><div class="wmile-body">
+    <div class="wmile-title">App Flutter recibe datos del reloj</div>
+    <div class="wmile-desc">flutter_blue_plus conecta, lee el servicio BLE y muestra los datos crudos en pantalla. Primer puente completo reloj → app.</div>
+    <div class="wmile-meta"><span class="collab-badge cb5">P5</span><span class="collab-badge cb4">P4</span><span class="wmile-date">8–11 ago</span></div>
+  </div></div>
+  <div class="wmile"><span class="wmile-num">R5</span><div class="wmile-body">
+    <div class="wmile-title">Algoritmo de sueño + sync con el backend</div>
+    <div class="wmile-desc">Convertir movimiento en horas dormidas (umbrales de actigrafía) y enviar el resumen a /wearable/sync para que se guarde en MariaDB.</div>
+    <div class="wmile-meta"><span class="collab-badge cb1">P1</span><span class="collab-badge cb5">P5</span><span class="collab-badge cb2">P2</span><span class="wmile-date">12–15 ago</span></div>
+  </div></div>
+  <div class="wmile"><span class="wmile-num">R6</span><div class="wmile-body">
+    <div class="wmile-title">Versión portable: batería + correa + pantalla con hora</div>
+    <div class="wmile-desc">Pasar de protoboard a versión con LiPo + TP4056 en cajita sujeta a la muñeca, y la OLED mostrando la hora (sincronizada desde el teléfono por BLE al conectar — sin necesidad de módulo RTC extra). No necesita ser bonita — necesita aguantar una noche.</div>
+    <div class="wmile-meta"><span class="collab-badge cb1">P1</span><span class="collab-badge cb5">P5</span><span class="wmile-date">15–18 ago</span></div>
+  </div></div>
+  <div class="wmile"><span class="wmile-num">R7</span><div class="wmile-body">
+    <div class="wmile-title">Calibración + noches reales de prueba</div>
+    <div class="wmile-desc">Dormir con el reloj puesto, comparar contra la realidad y ajustar umbrales. Al menos 2 personas, 2 noches cada una.</div>
+    <div class="wmile-meta"><span class="collab-badge cb5">P5</span><span class="collab-badge cb1">P1</span><span class="wmile-date">15–28 ago</span></div>
+  </div></div>
+</div>
+
+<div class="watch-warn">
+  ⚠️ <strong>Regla del reloj:</strong> pedir los componentes ESTA SEMANA (los envíos de AliExpress tardan 2–4 semanas; MercadoLibre local llega en días y conviene aunque sea un poco más caro). Si al 29 de julio no hay componentes en mano, se activa el plan B con banda comercial sin discusión — el calendario manda.
+</div>
+
+<script>
+// ═══════════ GANTT EDITABLE — datos + render + persistencia ═══════════
+(function(){
+  var G_START = new Date('2026-07-17T00:00:00');
+  var G_END   = new Date('2026-09-02T00:00:00');
+  var PHASES = ['Descubrimiento','Planificacion','Ejecucion','Revision','Entrega'];
+  var PHASE_LABEL = {Descubrimiento:'Descubrimiento · define el qué', Planificacion:'Planificación · define el cómo', Ejecucion:'Ejecución · se construye', Revision:'Revisión · se prueba', Entrega:'Entrega · 1 sept'};
+  var PHASE_COLOR = {Descubrimiento:'var(--accent4)', Planificacion:'var(--accent3)', Ejecucion:'var(--accent1)', Revision:'var(--accent2)', Entrega:'var(--green)'};
+  var PEOPLE = ['P1','P2','P3','P4','P5','EQ'];
+
+  function T(id,t,f,s,e,p,d,rec,chk){ return {id:id,t:t,f:f,s:s,e:e,p:p,est:'No iniciado',d:d,rec:rec,chk:(chk||[]).map(function(x){return [x,false];})}; }
+
+  var DEFAULTS = [
+    T('t01','Confirmar inscripción competencia','Descubrimiento','2026-07-17','2026-07-19',['EQ'],'Decidir si Bunwe entra a la competencia antes del 19 jul. Define si hay dos plazos o uno.','Bases oficiales de la competencia',['Revisar bases y fecha límite','Confirmar con el profesor/tutor','Comunicar decisión al equipo']),
+    T('t02','P5 Onboarding + investigación wearable','Descubrimiento','2026-07-19','2026-07-20',['P5'],'Valeria recorre la arquitectura Pi/FastAPI/MariaDB e investiga requerimientos del reloj.','Docs internos de la Pi · Tailscale docs · conocimientos: redes, SSH',['Leer docs de infraestructura','SSH a la Pi y recorrer servicios','Investigar 3 opciones de sensor/placa']),
+    T('t03','Arquitectura de notificaciones','Descubrimiento','2026-07-19','2026-07-21',['EQ'],'Definir stack: FCM para push + flutter_local_notifications para recordatorios locales.','FCM docs · flutter_local_notifications (pub.dev)',['Comparar FCM vs. alternativas','Listar eventos que notifican','Decidir push vs. local por evento']),
+    T('t04','Arquitectura del asistente IA de Bungwe','Descubrimiento','2026-07-20','2026-07-22',['P1','P4'],'Elegir proveedor de IA y definir alcance: organización, motivación y límites de apoyo emocional.','docs.claude.com · conocimientos: APIs REST, prompting',['Elegir proveedor de API','Definir alcance y límites','Listar temas que la IA no resuelve sola']),
+    T('t05','Viabilidad del reloj: propio vs. comercial','Descubrimiento','2026-07-21','2026-07-22',['P5','P1'],'Comparar ESP32+sensor vs. banda BLE comercial: costo, tiempo y precisión. Ver sección ⌚ Reloj.','Sección Reloj de esta página · cotizaciones',['Cotizar ESP32 + MPU6050','Investigar bandas BLE abiertas','Recomendación final documentada']),
+    T('t06','P2 Modelar tablas nuevas','Planificacion','2026-07-23','2026-07-24',['P2'],'Esquema MariaDB: recordatorios, notificaciones, chat_ia, wearable.','Data Modeler · docs MariaDB · conocimientos: SQL, modelado',['Tabla recordatorios','Tabla chat_ia','Tabla wearable','Revisar con P1']),
+    T('t07','P1 Diseñar endpoints nuevos','Planificacion','2026-07-23','2026-07-25',['P1'],'/notificaciones, /recordatorios, /asistente/chat, /wearable/sync en FastAPI. Es el contrato con la app.','FastAPI docs (Pydantic) · conocimientos: REST, JSON',['Especificar rutas y métodos','Documentar JSON de cada endpoint']),
+    T('t08','P3 Wireframes pantallas nuevas','Planificacion','2026-07-24','2026-07-26',['P3'],'Bocetar recordatorios, chat con Bungwe y vinculación del reloj en Bento oscuro.','Paleta: #0D0A1E #7C5CFC #6EE7B7 #FCD34D · Figma',['Wireframe recordatorios','Wireframe chat','Wireframe vinculación reloj']),
+    T('t09','P5 Elegir stack BLE','Planificacion','2026-07-25','2026-07-27',['P5'],'Definir flutter_blue_plus y el formato de datos reloj↔app.','flutter_blue_plus · espec. BLE GATT · conocimientos: protocolos',['Definir formato de datos','Probar con dispositivo BLE de prueba','Documentar protocolo para P4']),
+    T('t10','P4 Prompts y personalidad de Bungwe','Planificacion','2026-07-26','2026-07-28',['P4'],'La voz de Bungwe: motivacional y cercana, con límites explícitos de apoyo emocional.','docs.claude.com/prompt-engineering',['Escribir system prompt','Incluir derivación a ayuda real','Probar con 5-10 mensajes']),
+    T('t11','P1 Backend: FCM + recordatorios','Ejecucion','2026-07-29','2026-07-31',['P1'],'Envío de notificaciones push desde FastAPI y scheduler de recordatorios.','Firebase Admin SDK (Python)',['Credenciales Firebase','Notificación de prueba','Scheduler de recordatorios']),
+    T('t12','P2 Crear y poblar tablas nuevas','Ejecucion','2026-07-29','2026-07-30',['P2'],'Migraciones en MariaDB. Bloquea a P1, P4 y P5 hasta completarse.','Modelo de la fase de Planificación',['Ejecutar migraciones','Poblar datos de prueba']),
+    T('t13','P4 Notificaciones locales + FCM en la app','Ejecucion','2026-07-30','2026-08-01',['P4'],'Lado app: recibir push y programar recordatorios locales.','flutter_local_notifications · FlutterFire',['Configurar FlutterFire','Recibir push de prueba','Recordatorio local funcionando']),
+    T('t14','P3 Pantalla de recordatorios','Ejecucion','2026-08-01','2026-08-04',['P3'],'UI Bento para recordatorios activos, conectada a datos reales.','Wireframes de Planificación',['Tarjetas Bento','Estados activo/completado','Conectar datos de P4']),
+    T('t15','Reloj: prototipo en protoboard (R2)','Ejecucion','2026-07-29','2026-08-04',['P1','P5'],'ESP32 + MPU6050 cableados, primeras lecturas de movimiento. La tarea más riesgosa del sprint.','Sección ⌚ Reloj · conocimientos: electrónica básica, Arduino',['Armar circuito','Leer sensor en Monitor Serial','Distinguir reposo vs. movimiento']),
+    T('t16','P1 Backend: API del LLM para el chat','Ejecucion','2026-08-05','2026-08-07',['P1'],'Endpoint que recibe mensaje del usuario y responde como Bungwe, guardando historial.','docs.claude.com API',['Endpoint /asistente/chat','Aplicar system prompt de P4','Guardar historial en BD']),
+    T('t17','P3 Pantalla de chat con Bungwe','Ejecucion','2026-08-05','2026-08-08',['P3'],'Burbujas de chat estilo Bento con la mascota. La pantalla estrella de la demo.','Wireframe de chat · paleta de marca',['Burbujas Bento','Avatar de Bungwe','Input + envío']),
+    T('t18','Reloj: BLE visible en nRF Connect (R3)','Ejecucion','2026-08-05','2026-08-08',['P5'],'El ESP32 publica un servicio BLE verificable desde el teléfono antes de tocar Flutter.','nRF Connect · tutorial ESP32 BLE',['Servicio BLE publicado','Datos visibles en nRF Connect']),
+    T('t19','P4 Conectar chat con la IA','Ejecucion','2026-08-08','2026-08-11',['P4'],'Une la UI de P3 con el backend de P1: request/response, carga y errores.','Endpoint documentado por P1',['Conectar input al endpoint','Estado de carga','Manejo de error si la Pi está apagada']),
+    T('t20','Reloj: app Flutter recibe datos (R4)','Ejecucion','2026-08-08','2026-08-11',['P5','P4'],'flutter_blue_plus conecta y muestra datos crudos del reloj en pantalla.','flutter_blue_plus docs',['Emparejar dispositivo','Leer servicio BLE','Mostrar datos en pantalla']),
+    T('t21','P2 Guardar datos del reloj en BD','Ejecucion','2026-08-08','2026-08-11',['P2'],'Endpoint /wearable/sync persiste el payload del reloj en MariaDB.','Endpoint de P1 · tabla wearable',['Validar payload','Insertar en tabla wearable','Probar con datos reales de P5']),
+    T('t22','⭐ Integración total sin intervención manual','Ejecucion','2026-08-12','2026-08-15',['EQ'],'Reloj → app → backend → BD funcionando solo. LA promesa central del proyecto y el hito más vendedor.','Todas las piezas anteriores',['Simular noche completa','Verificar Historial automático','Corregir puntos de falla']),
+    T('t23','🛡️ Guardrails de la IA','Ejecucion','2026-08-12','2026-08-14',['P1','P4'],'La IA reconoce temas que exceden lo motivacional y deriva a recursos reales, sin diagnosticar.','Lista de temas sensibles de Descubrimiento',['Probar con temas sensibles simulados','Ajustar derivación','Documentar límites para la demo']),
+    T('t24','P3 Pulido visual pantallas nuevas','Ejecucion','2026-08-14','2026-08-18',['P3'],'Consistencia con paleta de marca y transiciones suaves.','Paleta de marca',['Revisar colores/fuentes','Transiciones','Revisión cruzada']),
+    T('t25','Reloj: versión portable + calibración (R6-R7)','Ejecucion','2026-08-15','2026-08-18',['P1','P5'],'Batería + correa, y ajustar umbrales de actigrafía contra sueño real.','LiPo + TP4056 · lecturas del prototipo',['Armar versión con batería','Comparar contra sueño real','Ajustar umbrales']),
+    T('t26','🧪 Pruebas integrales (3 features)','Ejecucion','2026-08-19','2026-08-22',['EQ'],'QA cruzado de notificaciones + chat + wearable en un solo flujo, en los 5 teléfonos.','Checklists de Ejecución',['Flujo completo integrado','Probar en 5 teléfonos','Registrar bugs']),
+    T('t27','P1 Bugs backend + autoarranque Pi','Ejecucion','2026-08-19','2026-08-22',['P1'],'Verificar que sleep-api aguanta la carga nueva y arranca solo tras reinicio.','Uptime Kuma · Beszel',['Logs bajo carga','Autoarranque tras reinicio','Cerrar bugs críticos']),
+    T('t28','P2 Verificar backups con tablas nuevas','Ejecucion','2026-08-21','2026-08-24',['P2'],'Confirmar que mysqldump incluye todo y que un restore funciona.','Cron de mysqldump en ~/backups/',['Tablas nuevas en el dump','Restore de prueba','Validar datos restaurados']),
+    T('t29','🌙 Pruebas de campo con el reloj real','Revision','2026-08-25','2026-08-28',['EQ'],'Dormir con el reloj puesto y validar todo el sistema en condiciones reales.','Prototipo calibrado',['2+ integrantes duermen con el reloj','Comparar datos vs. realidad','Notificaciones a la hora correcta']),
+    T('t30','✨ Pulido final UX/UI + APK','Revision','2026-08-26','2026-08-29',['EQ'],'Cerrar bugs de campo, última pasada visual, APK final.','Lista de bugs de campo',['Cerrar bugs','Pasada visual completa','Generar APK final']),
+    T('t31','🎤 Preparar demo/presentación','Revision','2026-08-28','2026-08-31',['EQ'],'Guion, video de respaldo por si falla la red en vivo, y ensayos.','Diagrama de comunicaciones (P5)',['Guion de demo','Video de respaldo','Ensayar 2 veces']),
+    T('t32','🏁 Entrega: prototipo funcional','Entrega','2026-09-01','2026-09-01',['EQ'],'Entrega oficial al liceo. Cierra el ciclo del roadmap.','APK final + presentación',['APK entregado','Presentación realizada','Retro del equipo'])
+  ];
+
+  var tasks = {};       // id -> task
+  var openDetail = null;
+  var editingId = null;
+  var GTABLE = 'gantt';
+  var hasSB = false;
+
+  function db(){ return (typeof sb !== 'undefined' && sb && typeof SUPABASE_URL !== 'undefined' && SUPABASE_URL.indexOf('PEGAR') === -1) ? sb : null; }
+
+  function pct(dateStr){
+    var d = new Date(dateStr + 'T00:00:00');
+    var total = G_END - G_START;
+    return Math.max(0, Math.min(100, ((d - G_START) / total) * 100));
+  }
+  function pctEnd(dateStr){
+    var d = new Date(dateStr + 'T00:00:00');
+    d.setDate(d.getDate() + 1); // barra inclusiva del día de fin
+    var total = G_END - G_START;
+    return Math.max(0, Math.min(100, ((d - G_START) / total) * 100));
+  }
+  function fmtShort(s){ var p = s.split('-'); return parseInt(p[2]) + '/' + parseInt(p[1]); }
+  function esc(x){ return String(x||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function render(){
+    var app = document.getElementById('gantt-app');
+    var html = '';
+    // regla de fechas
+    html += '<div class="gantt-ruler"><div></div><div class="gantt-ruler-track">';
+    var tick = new Date(G_START);
+    while(tick <= G_END){
+      var iso = tick.toISOString().slice(0,10);
+      html += '<span class="gantt-ruler-tick" style="left:'+pct(iso).toFixed(1)+'%">'+fmtShort(iso)+'</span>';
+      tick.setDate(tick.getDate()+7);
+    }
+    var today = new Date(); var tIso = today.toISOString().slice(0,10);
+    if (today >= G_START && today <= G_END) html += '<span class="gantt-today" style="left:'+pct(tIso).toFixed(1)+'%"></span>';
+    html += '</div></div>';
+
+    PHASES.forEach(function(ph){
+      var list = Object.values(tasks).filter(function(t){ return t.f===ph && !t.del; })
+        .sort(function(a,b){ return a.s < b.s ? -1 : 1; });
+      if (!list.length) return;
+      html += '<div class="gantt-phase-label"><span class="gantt-phase-dot" style="background:'+PHASE_COLOR[ph]+'"></span>'+PHASE_LABEL[ph]+'</div>';
+      list.forEach(function(t){
+        var estCls = t.est==='Completado' ? ' est-done' : (t.est==='En curso' ? ' est-curso' : '');
+        var dots = t.p.map(function(p){ return '<span class="pdot pdot-'+p+'"></span>'; }).join('');
+        html += '<div class="gantt-row">';
+        html += '<div class="gantt-row-label" onclick="ganttToggle(\''+t.id+'\')">'+dots+' '+esc(t.t)+'</div>';
+        html += '<div class="gantt-track"><div class="gantt-bar bar-'+t.f+estCls+'" style="left:'+pct(t.s).toFixed(1)+'%;width:'+Math.max(3,(pctEnd(t.e)-pct(t.s))).toFixed(1)+'%" onclick="ganttToggle(\''+t.id+'\')">'+fmtShort(t.s)+'→'+fmtShort(t.e)+'</div></div>';
+        html += '</div>';
+        if (openDetail === t.id){
+          var estB = t.est==='Completado' ? 'est-b-done' : (t.est==='En curso' ? 'est-b-curso' : 'est-b-no');
+          html += '<div class="gantt-row"><div class="task-detail">';
+          html += '<div class="td-head"><div class="td-title">'+esc(t.t)+'</div><div class="td-badges"><span class="td-est '+estB+'">'+t.est+'</span><span class="td-dates">'+fmtShort(t.s)+' → '+fmtShort(t.e)+'</span></div></div>';
+          if (t.d) html += '<div class="td-desc">'+esc(t.d)+'</div>';
+          if (t.rec) html += '<div class="td-rec"><strong>Recursos / conocimientos:</strong> '+esc(t.rec)+'</div>';
+          if (t.chk && t.chk.length){
+            html += '<ul class="td-chk">';
+            t.chk.forEach(function(c, i){
+              var cls = c[1] ? 'chk-done' : 'chk-todo';
+              var mark = c[1] ? '✓' : '';
+              html += '<li><span class="chk '+cls+'" onclick="ganttChk(\''+t.id+'\','+i+')">'+mark+'</span><span>'+esc(c[0])+'</span></li>';
+            });
+            html += '</ul>';
+          }
+          html += '<div class="td-actions"><button class="td-btn" onclick="ganttEdit(\''+t.id+'\')">✏️ Editar</button><button class="td-btn danger" onclick="ganttDel(\''+t.id+'\')">🗑 Eliminar</button></div>';
+          html += '</div></div>';
+        }
+      });
+    });
+    app.innerHTML = html;
+  }
+
+  function setSync(msg){ document.getElementById('gantt-sync').textContent = '· ' + msg; }
+
+  async function save(t){
+    tasks[t.id] = t;
+    render();
+    var client = db();
+    if (client){
+      var res = await client.from(GTABLE).upsert({ id: t.id, data: t }, { onConflict: 'id' });
+      if (res.error){ setSync('⚠ error al guardar: ' + res.error.message); }
+      else setSync('✓ sincronizado');
+    } else {
+      localStorage.setItem('gantt_' + t.id, JSON.stringify(t));
+      setSync('modo local (sin Supabase para el Gantt)');
+    }
+  }
+
+  // API global
+  window.ganttToggle = function(id){ openDetail = (openDetail === id) ? null : id; render(); };
+  window.ganttChk = function(id, i){
+    var t = tasks[id]; if(!t) return;
+    t.chk[i][1] = !t.chk[i][1];
+    if (t.chk.length && t.chk.every(function(c){return c[1];})) t.est = 'Completado';
+    else if (t.chk.some(function(c){return c[1];}) && t.est === 'No iniciado') t.est = 'En curso';
+    save(t);
+  };
+  window.ganttDel = function(id){
+    if (!confirm('¿Eliminar esta tarea para todo el equipo?')) return;
+    var t = tasks[id]; t.del = true; openDetail = null; save(t);
+  };
+  window.ganttEdit = function(id){ openModal(tasks[id]); };
+  window.ganttNew = function(){
+    openModal(T('t' + Date.now(), '', 'Ejecucion', '2026-08-01', '2026-08-03', ['EQ'], '', '', []));
+  };
+  window.gmClose = function(){ document.getElementById('gm-overlay').classList.remove('open'); editingId = null; };
+  window.gmSave = function(){
+    var t = tasks[editingId] || null;
+    var isNew = !t;
+    if (isNew) t = T(editingId, '', 'Ejecucion', '', '', [], '', '', []);
+    t.t = document.getElementById('gm-t').value.trim() || 'Sin título';
+    t.s = document.getElementById('gm-s').value || t.s;
+    t.e = document.getElementById('gm-e').value || t.s;
+    if (t.e < t.s) t.e = t.s;
+    t.f = document.getElementById('gm-f').value;
+    t.est = document.getElementById('gm-est').value;
+    t.d = document.getElementById('gm-d').value.trim();
+    t.rec = document.getElementById('gm-rec').value.trim();
+    t.p = [];
+    document.querySelectorAll('#gm-p .gm-pchip.on').forEach(function(c){ t.p.push(c.dataset.p); });
+    if (!t.p.length) t.p = ['EQ'];
+    var oldChk = t.chk || [];
+    var lines = document.getElementById('gm-chk').value.split('\n').map(function(l){return l.trim();}).filter(Boolean);
+    t.chk = lines.map(function(l){
+      var prev = oldChk.find(function(c){ return c[0] === l; });
+      return [l, prev ? prev[1] : false];
+    });
+    gmClose();
+    openDetail = t.id;
+    save(t);
+  };
+
+  function openModal(t){
+    editingId = t.id;
+    if (!tasks[t.id]) tasks[t.id] = t;
+    document.getElementById('gm-modal-title').textContent = t.t ? 'Editar tarea' : 'Nueva tarea';
+    document.getElementById('gm-t').value = t.t;
+    document.getElementById('gm-s').value = t.s;
+    document.getElementById('gm-e').value = t.e;
+    document.getElementById('gm-f').value = t.f;
+    document.getElementById('gm-est').value = t.est;
+    document.getElementById('gm-d').value = t.d || '';
+    document.getElementById('gm-rec').value = t.rec || '';
+    document.getElementById('gm-chk').value = (t.chk||[]).map(function(c){return c[0];}).join('\n');
+    var pc = document.getElementById('gm-p'); pc.innerHTML = '';
+    PEOPLE.forEach(function(p){
+      var chip = document.createElement('span');
+      chip.className = 'gm-pchip pc-' + p + (t.p.indexOf(p) >= 0 ? ' on' : '');
+      chip.dataset.p = p;
+      chip.textContent = p === 'EQ' ? 'Equipo' : p;
+      chip.onclick = function(){ chip.classList.toggle('on'); };
+      pc.appendChild(chip);
+    });
+    document.getElementById('gm-overlay').classList.add('open');
+  }
+
+  document.addEventListener('DOMContentLoaded', async function(){
+    DEFAULTS.forEach(function(t){ tasks[t.id] = t; });
+    var client = db();
+    if (client){
+      var res = await client.from(GTABLE).select('*');
+      if (res.error){
+        setSync('⚠ tabla "gantt" no existe en Supabase — usando datos base (los cambios NO se guardan hasta crearla)');
+      } else {
+        (res.data||[]).forEach(function(row){ if (row.data && row.data.id) tasks[row.data.id] = row.data; });
+        setSync('✓ sincronizado con el equipo');
+        client.channel('gantt-sync').on('postgres_changes', {event:'*', schema:'public', table:GTABLE}, function(payload){
+          var row = payload.new && payload.new.data ? payload.new : payload.old;
+          if (row && row.data && row.data.id){ tasks[row.data.id] = row.data; render(); }
+        }).subscribe();
+      }
+    } else {
+      Object.keys(localStorage).forEach(function(k){
+        if (k.indexOf('gantt_') === 0){ try { var t = JSON.parse(localStorage.getItem(k)); if (t && t.id) tasks[t.id] = t; } catch(e){} }
+      });
+      setSync('modo local');
+    }
+    render();
+  });
+})();
+</script>
+
 
 <!-- Pantalla de contraseña -->
 <div id="lock-screen">
