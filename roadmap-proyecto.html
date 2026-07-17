@@ -1846,8 +1846,7 @@
       if (res.error){ setSync('⚠ error al guardar: ' + res.error.message); }
       else setSync('✓ sincronizado');
     } else {
-      localStorage.setItem('gantt_' + t.id, JSON.stringify(t));
-      setSync('modo local (sin Supabase para el Gantt)');
+      setSync('⚠ Supabase no disponible — el cambio no se guardó');
     }
   }
 
@@ -1935,10 +1934,7 @@
         }).subscribe();
       }
     } else {
-      Object.keys(localStorage).forEach(function(k){
-        if (k.indexOf('gantt_') === 0){ try { var t = JSON.parse(localStorage.getItem(k)); if (t && t.id) tasks[t.id] = t; } catch(e){} }
-      });
-      setSync('modo local');
+      setSync('⚠ Supabase no conectado — el Gantt no funcionará');
     }
     render();
   });
